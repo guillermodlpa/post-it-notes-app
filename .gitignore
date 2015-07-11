@@ -1,1 +1,3 @@
-#
+#vagrant/.vagrant
+#vagrant/**/.vagrant
+#vagrant/local/.vagrant
