@@ -10,9 +10,15 @@ vagrantfile:
         network:
             private_network: 192.168.56.101
             forwarded_port:
-                vflnp_g3qxkwz6yh8l:
-                    host: '6504'
+                vflnp_wo00yjvoazcg:
+                    host: '6745'
                     guest: '22'
+                vflnp_ttp2itpgzc0u:
+                    host: '8000' # node.js app
+                    guest: '80'
+                vflnp_lalalalalala:
+                    host: '4000' # TCP communication of changes
+                    guest: '4000'
         post_up_message: ''
         provider:
             virtualbox:
@@ -86,7 +92,15 @@ locale:
             - 'en_US.UTF-8 UTF-8'
 firewall:
     install: '1'
-    rules: {  }
+    rules:
+        fr_mvhftbhh74hp:
+            port:
+                - '80'
+                - '8000'
+                - '4000'
+            priority: '100'
+            proto: tcp
+            action: accept
 cron:
     install: '1'
     jobs: {  }
