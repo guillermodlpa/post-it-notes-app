@@ -11,16 +11,16 @@ Project to get familiar with:
 <ol>
 	<li>
 		Add to /etc/hosts:
-		```
-		192.168.56.101  local.mapins.com
-		```
+        ```
+        192.168.56.101  local.mapins.com
+        ```
 	</li>
 	<li>
 		Start VM
-		```
-		cd vagrant/local
-		vagrant up
-		```
+        ```
+        cd vagrant/local
+        vagrant up
+        ```
 	</li>
 </ol>
 
