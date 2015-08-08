@@ -8,7 +8,7 @@ Project to get familiar with:
 
 ## Setup
 
-<ul>
+<ol>
 	<li>
 		Add to /etc/hosts:
 		```
@@ -22,5 +22,5 @@ Project to get familiar with:
 		vagrant up
 		```
 	</li>
-</ul>
+</ol>
 
