@@ -1,10 +1,16 @@
 {
   "apps" : [{
-    "name"        : "mapins",
-    "script"      : "app/app.js",
-    "error_file"  : "logs/mapins_error.log",
-    "out_file"    : "logs/mapins_out.log",
-    "pid_file"    : "logs/mapins.pid",
-    "watch"       : true,
+	"name"        : "mapins",
+	"script"      : "app/app.js",
+	"error_file"  : "logs/mapins_error.log",
+	"out_file"    : "logs/mapins_out.log",
+	"pid_file"    : "logs/mapins.pid",
+	"watch"       : true,
+	// options documentation -> https://github.com/paulmillr/chokidar#api
+	"watch_options" : {
+		// needed for the watch to track file changes thru vagrant
+		// https://github.com/Unitech/PM2/issues/1062#issuecomment-122317025
+		"usePolling": true
+	}
   }]
 }
