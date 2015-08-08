@@ -13,5 +13,6 @@
 
 echo "$(date) - npm_packages.sh" >> /var/www/log.txt
 
-sudo npm install pm2 -g --unsafe-perm 2&>1 >/dev/null
+npm install pm2 -g --unsafe-perm #2&>1 >/dev/null
 # then in startup_always it actually starts the process
+

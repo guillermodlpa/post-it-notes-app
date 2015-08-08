@@ -1,0 +1,11 @@
+{
+  "name": "mapins",
+  "version": "0.1.0",
+  "devDependencies": {
+    "express": "4.*",
+    "pm2": "*"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

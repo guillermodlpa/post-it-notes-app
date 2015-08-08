@@ -5,3 +5,5 @@ vagrant/local/.vagrant
 logs/
 
 *.lock
+
+node_modules

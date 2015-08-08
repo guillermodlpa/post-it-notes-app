@@ -1,7 +1,7 @@
 {
   "apps" : [{
     "name"        : "mapins",
-    "script"      : "app.js",
+    "script"      : "app/app.js",
     "error_file"  : "logs/mapins_error.log",
     "out_file"    : "logs/mapins_out.log",
     "pid_file"    : "logs/mapins.pid",

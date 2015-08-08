@@ -11,7 +11,8 @@
 # pm2 also has features allowing you to watch for changes in a folder so that your node.js app will be restart automatically
 # if you're developing. See pm2 documentation for those details or type pm2 in ssh.
 
+echo "" >> /var/www/logs/vagrant.log
 echo "$(date) - server_start.sh" >> /var/www/logs/vagrant.log
 
 #package installed in exec_once
-cd /var/www && sudo pm2 start processes.json
+cd /var/www && pm2 start processes.json
