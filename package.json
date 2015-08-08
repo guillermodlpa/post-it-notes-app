@@ -6,7 +6,13 @@
     "express-partials": "0.*",
     "pm2": "*",
     "ejs": "1.0",
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+
+    "grunt": "~0.4.4",
+    "glob": "^3.2.9",
+    "load-grunt-tasks": "~0.4.0",
+    "grunt-contrib-copy": "~0.5.0"
+
   },
   "engines": {
     "node": ">=0.10.0"
