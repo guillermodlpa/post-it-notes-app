@@ -8,19 +8,12 @@ Project to get familiar with:
 
 ## Setup
 
-<ol>
-	<li>
-		Add to /etc/hosts:
-        ```
-        192.168.56.101  local.mapins.com
-        ```
-	</li>
-	<li>
-		Start VM
-        ```
-        cd vagrant/local
-        vagrant up
-        ```
-	</li>
-</ol>
-
+1. Add to /etc/hosts:
+    ```
+    192.168.56.101  local.mapins.com
+    ```
+2. Start VM
+    ```
+    cd vagrant/local
+    vagrant up
+    ```
