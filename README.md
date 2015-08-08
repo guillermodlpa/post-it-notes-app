@@ -6,8 +6,21 @@ Project to get familiar with:
 * Node.js
 * React
 
-# Setup
+## Setup
 
-Add to /etc/hosts:
+<ul>
+	<li>
+		Add to /etc/hosts:
+		```
+		192.168.56.101  local.mapins.com
+		```
+	</li>
+	<li>
+		Start VM
+		```
+		cd vagrant/local
+		vagrant up
+		```
+	</li>
+</ul>
 
-192.168.56.101  local.mapins.com
