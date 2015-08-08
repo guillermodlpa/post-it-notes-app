@@ -1,5 +1,10 @@
 # mapins
 
+Project to get familiar with:
+
+* Vagrant, puphpet
+* Node.js
+* React
 
 # Setup
 
