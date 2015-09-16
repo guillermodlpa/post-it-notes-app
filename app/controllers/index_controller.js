@@ -8,6 +8,5 @@ exports.index = function( request, response, next ) {
 };
 
 exports.increaseCounter = function( request, response, next ) {
-
 	response.end('OK');
 }
