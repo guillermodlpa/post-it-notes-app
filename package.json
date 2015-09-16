@@ -1,5 +1,5 @@
 {
-  "name": "mapins",
+  "name": "todo-list-mongo-backbone",
   "version": "0.1.0",
   "devDependencies": {
     "express": "4.*",
