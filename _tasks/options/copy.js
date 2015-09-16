@@ -1,10 +1,11 @@
 module.exports = {
 	components: {
 		expand: true,
-		// cwd: "app/resources/public",
 		src: [
-			"app/node_modules/jquery/dist/jquery.min.js"
+			"node_modules/jquery/dist/jquery.min.js"
 		],
-		dest: "app/public"
+		dest: "app/public/js/libs",
+		// flatten so the input directory structure doesn't get copied
+		flatten: true
 	}
 }
