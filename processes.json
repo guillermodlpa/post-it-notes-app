@@ -1,10 +1,10 @@
 {
   "apps" : [{
-	"name"        : "mapins",
-	"script"      : "app/app.js",
-	"error_file"  : "logs/mapins_error.log",
-	"out_file"    : "logs/mapins_out.log",
-	"pid_file"    : "logs/mapins.pid",
+	"name"        : "TODO List",
+	"script"      : "app/server/app.js",
+	"error_file"  : "logs/todo_list_error.log",
+	"out_file"    : "logs/todo_list_out.log",
+	"pid_file"    : "logs/todo_list.pid",
 	"watch"       : true,
 	// options documentation -> https://github.com/paulmillr/chokidar#api
 	"watch_options" : {

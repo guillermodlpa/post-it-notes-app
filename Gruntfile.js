@@ -18,13 +18,13 @@ module.exports = function (grunt) {
 	grunt.loadTasks('_tasks');
 
 	grunt.registerTask('default', 'All compilation', function(env) {
-		grunt.task.run('build-js')
+		grunt.task.run('build-js');
 	});
 
 	grunt.registerTask('build-js', 'Build all the components and javascript', [
 		'copy:components',
 		// 'copy:tinymce-plugins',			// copy all tinymce plugins to webroot components
-		// 'browserify',
+		'browserify',
 		// 'copy:js',
 		// 'copy:sui-js',
 		// 'uglify'

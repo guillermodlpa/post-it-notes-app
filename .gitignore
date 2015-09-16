@@ -11,3 +11,6 @@ node_modules
 
 # libs directory, generated contents with grunt build-js
 app/public/js/libs
+
+# browserified JS
+app/public/js/bundles
