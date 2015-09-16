@@ -3,6 +3,7 @@ vagrant/**/.vagrant
 vagrant/local/.vagrant
 
 logs/
+*.log
 
 *.lock
 
