@@ -4,7 +4,8 @@ Project to get familiar with:
 
 * Vagrant, puphpet
 * Node.js
-* React
+* Backbone
+* MongoDB
 
 ## Setup
 
@@ -14,7 +15,13 @@ Project to get familiar with:
     192.168.56.101  local.mapins.com
     ```
 
-2. Start VM
+2. Install dependencies. Maybe sudo needed
+
+    ```
+    npm install
+    ```
+
+3. Start VM
 
     ```
     cd vagrant/local
