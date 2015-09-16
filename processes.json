@@ -1,7 +1,7 @@
 {
   "apps" : [{
 	"name"        : "TODO List",
-	"script"      : "app/server/app.js",
+	"script"      : "app/app.js",
 	"error_file"  : "logs/todo_list_error.log",
 	"out_file"    : "logs/todo_list_out.log",
 	"pid_file"    : "logs/todo_list.pid",
