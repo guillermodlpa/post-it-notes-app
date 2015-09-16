@@ -13,8 +13,8 @@
     "load-grunt-tasks": "~0.4.0",
     "grunt-contrib-copy": "~0.5.0",
 
-    "mongodb": "^2.0.0"
-
+    "mongodb": "^2.0.0",
+    "mongo-express": "*"
   },
   "engines": {
     "node": ">=0.10.0"

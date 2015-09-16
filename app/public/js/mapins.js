@@ -5,8 +5,8 @@ $(function(){
 		$.ajax({
 			url: window.location.pathname + 'increaseCounter'
 		})
-		.done(function(){
-			alert('done');
+		.done(function( result ){
+			alert(result);
 		})
 		.fail(function(){
 			alert('fail');
