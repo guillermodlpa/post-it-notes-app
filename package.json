@@ -4,6 +4,7 @@
   "devDependencies": {
     "express": "4.*",
     "express-partials": "0.*",
+    "body-parser": "1.14.0",
     "pm2": "*",
     "ejs": "1.0",
     "underscore": "^1.8.3",

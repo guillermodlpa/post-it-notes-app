@@ -19,7 +19,7 @@ exports.index = function( req, res, next ) {
 
 		// declare schema
 		var todoListItemSchema = mongoose.Schema({
-			text: String,
+			content: String,
 			date: {type: Date, default: Date.now}
 		});
 
@@ -39,6 +39,16 @@ exports.index = function( req, res, next ) {
 
 exports._new = function( req, res, next ) {
 
+	// get parameter with item content
+	var itemContent = typeof req.body.content !== 'undefined' ? req.body.content : '';
+
+	// validate
+	if ( !itemContent ) {
+		_sendError( res, 'emptyParams' );
+		return;
+	}
+
+	// prepare DB
 	mongoose.connect(mongoDbUrl);
 
 	var db = mongoose.connection;
@@ -49,14 +59,14 @@ exports._new = function( req, res, next ) {
 
 		// declare schema
 		var todoListItemSchema = mongoose.Schema({
-			text: String,
+			content: String,
 			date: {type: Date, default: Date.now}
 		});
 
 		// create model
 		var TodoListItem = mongoose.model('TodoListItem', todoListItemSchema);
 
-		var item = new TodoListItem({ text: 'Noisy' });
+		var item = new TodoListItem({ content: itemContent });
 
 		// save to db
 		noisy.save(function (err, fluffy) {

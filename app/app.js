@@ -4,12 +4,17 @@ var http = require('http');
 var _ip = '0.0.0.0';
 var _port = 8000;
 
-var express = require('express');
-var partials = require('express-partials');
+var express = require('express'),
+	partials = require('express-partials'),
+	bodyParser = require("body-parser"); // for POST request parameters parsing into req.body automatically
+
 var app = express();
 
 app.set( 'view engine', 'ejs');
 app.use( partials() );
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // all routes are in controllers/routes.js
 var routes = require('./server/controllers/routes')(app);

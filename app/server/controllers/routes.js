@@ -9,7 +9,7 @@ module.exports = function (app) {
 	app.get('/', indexController.index);
 
 	app.get('/todo', todoListController.index);
-	app.get('/todo/new', todoListController._new);
+	app.post('/todo/new', todoListController._new);
 
 	//app.get('/map', mapController.index);
 

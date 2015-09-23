@@ -4,6 +4,7 @@ vagrant/local/.vagrant
 
 logs/
 *.log
+log.txt
 
 *.lock
 
