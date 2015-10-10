@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('build-js', 'Build all the components and javascript', [
-		'copy:components',
+		'copy',
 		// 'copy:tinymce-plugins',			// copy all tinymce plugins to webroot components
 		'browserify',
 		// 'copy:js',

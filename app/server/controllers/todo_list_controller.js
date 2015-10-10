@@ -69,7 +69,7 @@ exports._new = function( req, res, next ) {
 		var item = new TodoListItem({ content: itemContent });
 
 		// save to db
-		noisy.save(function (err, fluffy) {
+		item.save(function (err, fluffy) {
 			if ( err ) {
 				_sendError( res, 'errorWithSavingItem' );
 			} else {
