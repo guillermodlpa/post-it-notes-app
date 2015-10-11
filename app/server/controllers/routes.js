@@ -1,15 +1,15 @@
 // ROUTES
 // routes/index.js
 
-var indexController = require("./index_controller");
-var todoListController = require("./todo_list_controller");
+var indexController = require("./IndexController");
+var todoListController = require("./todoListController");
 
 module.exports = function (app) {
 
 	app.get('/', indexController.index);
 
 	app.get('/todo', todoListController.index);
-	app.post('/todo/new', todoListController._new);
+	app.post('/todo/add', todoListController.add);
 
 	//app.get('/map', mapController.index);
 

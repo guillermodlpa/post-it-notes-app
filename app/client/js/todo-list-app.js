@@ -11,8 +11,8 @@ var $ = window.$;
 var _ = window._;
 
 // Require handlebars and backbone
-// window.Handlebars = require('./libs/handlebars.js');
-window.Backbone = require('./libs/backbone.js');
+window.Handlebars = require('handlebars');
+window.Backbone = require('backbone');
 
 // Insert jQuery and Underscore into Backbone scope
 Backbone.$ = $;
@@ -34,6 +34,7 @@ Backbone._ = _;
 ////////////////////////////////
 // Backbone Views
 
+var BaseView = require('./views/BaseView');
 
 ////////////////////////////////
 // App Methods
@@ -55,9 +56,10 @@ window.todoListApp = function() {
 // App Kick off
 
 $(function(){
-
+	window.todoListApp.init();
 });
 
+/*
 $(function(){
 
 	$.ajax({
@@ -91,4 +93,4 @@ $(function(){
 		return false;
 	});
 
-});
+});*/

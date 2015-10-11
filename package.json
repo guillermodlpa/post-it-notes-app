@@ -2,6 +2,7 @@
   "name": "todo-list-mongo-backbone",
   "version": "0.1.0",
   "devDependencies": {
+
     "express": "4.*",
     "express-partials": "0.*",
     "body-parser": "1.14.0",
@@ -17,6 +18,11 @@
     "load-grunt-tasks": "~0.4.0",
     "grunt-contrib-copy": "~0.5.0",
     "grunt-browserify": "^3.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-stylus": "^0.22.0",
+
+    "stylus": "^0.52.4",
+    "normalizecss": "^3.0.0",
 
     "mongodb": "^2.0.0",
     "mongo-express": "*",

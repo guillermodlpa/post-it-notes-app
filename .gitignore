@@ -15,3 +15,7 @@ app/public/js/libs
 
 # browserified JS
 app/public/js/bundles
+
+# Javascript libraries that are copied with grunt copy from node_modules
+#app/public/js/libs/*.js
+#app/client/js/libs/*.js

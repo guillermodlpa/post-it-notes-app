@@ -3,7 +3,7 @@
 <div id="todoListAdder">
 	<form id="todoListAdderForm">
 		<input type="text" name="content"/>
-		<input type="submit" value="+">
+		<div id="todoListAdderBtn">+</div>
 	</form>
 </div>
 
@@ -11,12 +11,6 @@
 	<!-- List items populate here -->
 </div>
 
-<script id="todoListItemTemplate" type="text/template">
-	<div class="todo-list-item">
-		<div class="todo-list-item--content"></div>
-		<div class="todo-list-item--actions">
-			<div class="todo-list-item--edit"></div>
-			<div class="todo-list-item--remove"></div>
-		</div>
-	</div>
+<script id="todoListItemTemplate" type="text/x-handlebars-template">
+	<div>{{content}}</div>
 </script>

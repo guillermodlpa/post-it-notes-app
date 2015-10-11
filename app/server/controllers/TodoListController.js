@@ -1,13 +1,24 @@
-
-// var mapController = require("./map_controller");
-
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 
 // Database name is set on config.yaml, the puphpet file
 var mongoDbUrl = "mongodb://localhost:27017/local_todo_list";
 
-exports.index = function( req, res, next ) {
+//////////////
+// Model dependencies
+var TodoListItemModel = require('../models/TodoListItemModel');
+
+//////////////
+// Public Methods
+module.exports = {
+	index: index,
+	add: add
+}
+
+//////////////
+// Controller functions
+
+function index( req, res, next ) {
 
 	mongoose.connect(mongoDbUrl);
 
@@ -17,27 +28,19 @@ exports.index = function( req, res, next ) {
 	});
 	db.once('open', function (callback) {
 
-		// declare schema
-		var todoListItemSchema = mongoose.Schema({
-			content: String,
-			date: {type: Date, default: Date.now}
-		});
-
-		// create model
-		var TodoListItem = mongoose.model('TodoListItem', todoListItemSchema);
-
 		// find all
-		TodoListItem.find(function (err, todoListItems) {
+		TodoListItemModel.find(function (err, todoListItems) {
 			if (err) {
 				_sendError( res, 'errorWithFindTodoListItems' );
 			} else {
 				_sendResponse( res, todoListItems );
 			}
+			db.close();
 		});
 	});
 };
 
-exports._new = function( req, res, next ) {
+function add( req, res, next ) {
 
 	// get parameter with item content
 	var itemContent = typeof req.body.content !== 'undefined' ? req.body.content : '';
@@ -57,24 +60,16 @@ exports._new = function( req, res, next ) {
 	});
 	db.once('open', function (callback) {
 
-		// declare schema
-		var todoListItemSchema = mongoose.Schema({
-			content: String,
-			date: {type: Date, default: Date.now}
-		});
-
-		// create model
-		var TodoListItem = mongoose.model('TodoListItem', todoListItemSchema);
-
-		var item = new TodoListItem({ content: itemContent });
+		var item = new TodoListItemModel({ content: itemContent });
 
 		// save to db
 		item.save(function (err, fluffy) {
 			if ( err ) {
 				_sendError( res, 'errorWithSavingItem' );
 			} else {
-				_sendResponse( res );
+				_sendResponse( res, item );
 			}
+			db.close();
 		});
 	});
 };

@@ -21,13 +21,14 @@ module.exports = function (grunt) {
 		grunt.task.run('build-js');
 	});
 
-	grunt.registerTask('build-js', 'Build all the components and javascript', [
+	grunt.registerTask('build-js', 'Build all the Javascript files', [
 		'copy',
-		// 'copy:tinymce-plugins',			// copy all tinymce plugins to webroot components
 		'browserify',
-		// 'copy:js',
-		// 'copy:sui-js',
-		// 'uglify'
+		'watch'
+	]);
+
+	grunt.registerTask('build-css', 'Build all the CSS Files', [
+		'stylus',
 	]);
 };
 
