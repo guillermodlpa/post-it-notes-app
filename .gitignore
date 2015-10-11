@@ -17,6 +17,6 @@ app/public/js/libs
 app/public/js/bundles
 
 # libraries that are copied with grunt copy from node_modules
-#app/public/js/libs/*.js
-#app/client/js/libs/*.js
-#app/client/styl/libs/*.css
+app/public/js/libs/*.js
+app/client/js/libs/*.js
+app/client/styl/libs/*.css
