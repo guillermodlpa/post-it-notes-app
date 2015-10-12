@@ -11,13 +11,20 @@ module.exports = Backbone.View.extend({
 	},
 
 	TodoListItemCollection: null,
+	eventAggregator: null,
 
-	initialize: function() {
+	initialize: function( options ) {
+
+		// passing the global event aggregator for this app
+		this.eventAggregator = options.eventAggregator;
 
 		this.$listContainer = $('#todoListContainer');
 		this.$adderForm = $('#todoListAdderForm');
 
 		this.TodoListItemCollection = new TodoListItemCollection();
+
+		// for debugging
+		window.collection = this.TodoListItemCollection;
 
 		// listeners structure taken from Todos example from Backbone.js
 		this.listenTo( this.TodoListItemCollection, 'add', this.addOne );
@@ -48,16 +55,23 @@ module.exports = Backbone.View.extend({
 	},
 
 	getMarkupForNewItem: function( todoListItem ) {
-		var view = new TodoListItemView({model: todoListItem});
+		var view = new TodoListItemView({
+			model: todoListItem,
+			eventAggregator: this.eventAggregator
+		});
+
 		return view.render().el;
 	},
 
 	submitAddTodoListItem: function( event ) {
 
+		var _this = this;
+
 		$.ajax({
 			type: 'POST',
 			url: window.location.pathname + 'todo/add',
-			data: this.$adderForm.serialize()
+			data: this.$adderForm.serialize(),
+			dataType: 'json'
 		})
 		.done( function( response ) {
 
@@ -69,7 +83,7 @@ module.exports = Backbone.View.extend({
 			}
 
 			// add a new model by passing its attributes to the collection
-			TodoListItemCollection.add( todoListItem );
+			_this.TodoListItemCollection.add( todoListItem );
 		})
 		.fail( function() {
 			alert("Whoops, the adding failed");

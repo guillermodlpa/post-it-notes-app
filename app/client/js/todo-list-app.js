@@ -6,13 +6,11 @@ window.todoListApp = {};
 ////////////////////////////////
 // Dependencies
 
-// Require Backbone dependencies from window for now
-var $ = window.$;
-var _ = window._;
-
-// Require handlebars and backbone
+// Require window dependencies
 window.Handlebars = require('handlebars');
 window.Backbone = require('backbone');
+window._ = require('underscore');
+window.$ = require('jquery'); // this guy is not actually aliased, but shimmed. Why? Other JS plugins could use it and we don't wanna load it twice or hide it
 
 // Insert jQuery and Underscore into Backbone scope
 Backbone.$ = $;
@@ -40,7 +38,13 @@ var BaseView = require('./views/BaseView');
 // App Methods
 
 function _init() {
-	new BaseView();
+
+	// create the app global event aggregator
+	var eventAggregator = _.extend({}, Backbone.Events);
+
+	new BaseView({
+		eventAggregator: eventAggregator
+	});
 }
 
 ////////////////////////////////

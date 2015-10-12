@@ -12,7 +12,8 @@ var TodoListItemModel = require('../models/TodoListItemModel');
 // Public Methods
 module.exports = {
 	index: index,
-	add: add
+	add: add,
+	remove: remove
 }
 
 //////////////
@@ -21,7 +22,6 @@ module.exports = {
 function index( req, res, next ) {
 
 	mongoose.connect(mongoDbUrl);
-
 	var db = mongoose.connection;
 	db.on('error', function(){
 		_sendError( res, 'errorOpeningDbConnection' );
@@ -53,7 +53,6 @@ function add( req, res, next ) {
 
 	// prepare DB
 	mongoose.connect(mongoDbUrl);
-
 	var db = mongoose.connection;
 	db.on('error', function(){
 		_sendError( res, 'errorOpeningDbConnection' );
@@ -74,6 +73,36 @@ function add( req, res, next ) {
 	});
 };
 
+
+function remove( req, res, next ) {
+
+	var idToDelete = req.params.id;
+
+	// validate
+	if ( !idToDelete ) {
+		_sendError( res, 'emptyParams' );
+		return;
+	}
+
+	mongoose.connect(mongoDbUrl);
+	var db = mongoose.connection;
+	db.on('error', function(){
+		_sendError( res, 'errorOpeningDbConnection' );
+	});
+	db.once('open', function (callback) {
+
+		// remove from db
+		TodoListItemModel.remove({_id: idToDelete}, function( err, removed ) {
+
+			if ( !removed ) {
+				_sendError( res, 'errorRemovingFromDb' );
+			} else {
+				_sendResponse( res, removed );
+			}
+			db.close();
+		});
+	});
+}
 
 /**
  * little helper function to send back JSON encoded responses

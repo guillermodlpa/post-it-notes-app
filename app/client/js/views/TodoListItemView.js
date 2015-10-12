@@ -5,9 +5,29 @@ module.exports = Backbone.View.extend({
 
 	template: null,
 
-	events: {},
+	events: {
+		// on desktop, selecting happens on hover
+		'mouseover': 'selectItem',
+		'mouseout': 'deselectItem',
 
-	initialize: function() {
+		// on mobile, selecting happens on click
+		'click': 'selectItem',
+
+		'click .item-delete': 'deleteItem'
+	},
+
+	// state variables
+	isSelected: false,
+	eventAggregator: null,
+
+
+	initialize: function( options ) {
+
+		// passing the global event aggregator for this app
+		this.eventAggregator = options.eventAggregator;
+
+		// bind to the item selected event from the global event aggregator, so that if another card opens, we close
+		this.eventAggregator.bind('item-selected', _.bind( this.deselectItemUnlessMyself, this ) );
 
 		// compile with Handlebars the template, in a <script> tag on the markup
 		this.template = Handlebars.compile( $("#todoListItemTemplate").html() );
@@ -22,4 +42,60 @@ module.exports = Backbone.View.extend({
 
 		return this;
 	},
+
+	/**
+	 * toggles the item as selected, and notifies thru the event aggregator so other items deselect
+	 */
+	selectItem: function() {
+
+		// if already selected (hovered on desktop), just skip
+		if ( this.isSelected ) {
+			return;
+		}
+
+		this.isSelected = true;
+		this.updateSelectedStateView();
+
+		// trigger the event on the global app event aggregator, so other items can deselect
+		this.eventAggregator.trigger('item-selected', this ); // pass ourselves so we can not deslect ourselves
+	},
+
+	/**
+	 * deselects this item.
+	 */
+	deselectItem: function() {
+
+		if ( !this.isSelected ) {
+			return;
+		}
+
+		this.isSelected = false;
+		this.updateSelectedStateView();
+	},
+
+	/**
+	 * callback for any item being selected, notified globally.
+	 * allows to deselect all items when one is selected, except for the one that was selected
+	 */
+	deselectItemUnlessMyself: function( view ) {
+		if ( this.isSelected && view !== this ) {
+			this.deselectItem();
+		}
+	},
+
+	/**
+	 * changes the selected state on the view
+	 */
+	updateSelectedStateView: function() {
+		this.$el.toggleClass('is-selected', this.isSelected );
+	},
+
+	deleteItem: function() {
+
+		// destroy the model. This method is overriden to notify the server
+		this.model.destroy();
+
+		// make view dissapear
+		this.remove();
+	}
 });

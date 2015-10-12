@@ -1,6 +1,68 @@
+$postItColor = #ffff88
+$postItLighterColor = #ffffc6
+
+$postItSize = 15rem // original 250px
+
 .todo-list-item
+	position relative
 	display inline-block
-	width 20rem
-	height 20rem
-	background-color yellow
-	border 1px solid #000
+
+	width  $postItSize
+	min-height $postItSize
+	max-height $postItSize
+	padding 2.5rem 1.5rem 1rem 1.5rem
+	margin  0 1rem 3rem 1rem
+
+	background $postItColor /* Old browsers */
+	background -moz-linear-gradient(-45deg, $postItColor 81%, $postItColor 82%, $postItColor 82%, $postItLighterColor 100%) /* FF3.6+ */
+	background -webkit-gradient(linear, left top, right bottom, color-stop(81%,$postItColor), color-stop(82%,$postItColor), color-stop(82%,$postItColor), color-stop(100%,$postItLighterColor)) /* Chrome,Safari4+ */
+	background -webkit-linear-gradient(-45deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* Chrome10+,Safari5.1+ */
+	background -o-linear-gradient(-45deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* Opera 11.10+ */
+	background -ms-linear-gradient(-45deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* IE10+ */
+	background linear-gradient(135deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* W3C */
+
+	border 1px solid #E8E8E8
+
+	font-family "Comic Sans MS", cursive, sans-serif
+
+	border-bottom-right-radius 60px 5px
+
+	// slight lighter color on the top of the post it
+	&:before
+		content ""
+		position absolute
+		top 0
+		width 100%
+		height 2.5rem
+		background-color #fdfd86
+		left 0
+
+	// shadow in the bottom right corner
+	&:after
+		content ""
+		position absolute
+		right -0px
+		bottom 20px
+		width ($postItSize/2)
+		height 25px
+
+		z-index -1
+		background rgba(0, 0, 0, 0.2)
+		box-shadow 2px 15px 5px rgba(0, 0, 0, 0.40)
+		-moz-transform matrix(-1, -0.1, 0, 1, 0, 0)
+		-webkit-transform matrix(-1, -0.1, 0, 1, 0, 0)
+		-o-transform matrix(-1, -0.1, 0, 1, 0, 0)
+		-ms-transform matrix(-1, -0.1, 0, 1, 0, 0)
+		transform matrix(-1, -0.1, 0, 1, 0, 0)
+
+	// when selected
+	&.is-selected
+		border-color blue
+
+.item-delete
+	position absolute
+	bottom 1rem
+	right 1rem
+	display none
+	.is-selected &
+		display block
