@@ -13,6 +13,7 @@ var TodoListItemModel = require('../models/TodoListItemModel');
 module.exports = {
 	index: index,
 	add: add,
+	edit: edit,
 	remove: remove
 }
 
@@ -98,6 +99,36 @@ function remove( req, res, next ) {
 				_sendError( res, 'errorRemovingFromDb' );
 			} else {
 				_sendResponse( res, removed );
+			}
+			db.close();
+		});
+	});
+}
+
+function edit( req, res, next ) {
+
+	var idToEdit = req.params.id;
+
+	// validate
+	if ( !idToEdit ) {
+		_sendError( res, 'emptyParams' );
+		return;
+	}
+
+	mongoose.connect(mongoDbUrl);
+	var db = mongoose.connection;
+	db.on('error', function(){
+		_sendError( res, 'errorOpeningDbConnection' );
+	});
+	db.once('open', function (callback) {
+
+		// remove from db
+		TodoListItemModel.update({_id: idToEdit}, {content: req.body.content }, function( err, raw ) {
+
+			if ( err ) {
+				_sendError( res, 'errorRemovingFromDb' );
+			} else {
+				_sendResponse( res );
 			}
 			db.close();
 		});

@@ -1,7 +1,9 @@
 module.exports = Backbone.Model.extend({
 
 	defaults: {
-
+		_id: null,
+		content: '',
+		date: null
 	},
 
 	initialize: function() {
@@ -28,5 +30,30 @@ module.exports = Backbone.Model.extend({
 		});
 
 		Backbone.Model.prototype.destroy.call( this );
+	},
+
+	/**
+	 * updates the internal content variable and lets the server know
+	 */
+	saveContent: function( content ) {
+
+		this.set('content', content);
+
+		$.ajax({
+			type: 'POST',
+			url: window.location.pathname + 'todo/edit/'+ this.get('_id'),
+			dataType: 'json',
+			data: {
+				content: content
+			}
+		})
+		.done( function( response ) {
+			if ( !response.status || response.status !== 'success' ) {
+				alert('not good stuff deleting');
+			}
+		})
+		.fail( function() {
+			alert('bad stuff deleting');
+		});
 	}
 });

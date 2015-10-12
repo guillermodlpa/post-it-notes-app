@@ -13,7 +13,12 @@ module.exports = Backbone.View.extend({
 		// on mobile, selecting happens on click
 		'click': 'selectItem',
 
-		'click .item-delete': 'deleteItem'
+		'click .item-delete': 'onDeleteItem',
+
+		// events for handling editing the item content
+		'blur .item-content': 'onContentEdited',
+		'keyup .item-content': 'onContentEdited',
+		'paste .item-content': 'onContentEdited'
 	},
 
 	// state variables
@@ -90,12 +95,30 @@ module.exports = Backbone.View.extend({
 		this.$el.toggleClass('is-selected', this.isSelected );
 	},
 
-	deleteItem: function() {
+	/**
+	 * handles the delete action triggered from the UI
+	 */
+	onDeleteItem: function() {
 
 		// destroy the model. This method is overriden to notify the server
 		this.model.destroy();
 
 		// make view dissapear
 		this.remove();
+	},
+
+	/**
+	 * on saved content, debounces the change and calls the model's action for saving
+	 */
+	onContentEdited: function() {
+
+		var _this = this;
+
+		clearInterval( this.contentEditingTimer );
+		this.contentEditingTimer = setTimeout( function() {
+
+			// the model handles this action
+			_this.model.saveContent( _this.$el.find('.item-content').html() );
+		}, 1000);
 	}
 });
