@@ -19,12 +19,13 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('default', 'All compilation', function(env) {
 		grunt.task.run('build-js');
+		grunt.task.run('build-css');
+		grunt.task.run('watch');
 	});
 
 	grunt.registerTask('build-js', 'Build all the Javascript files', [
 		'copy',
-		'browserify',
-		'watch'
+		'browserify'
 	]);
 
 	grunt.registerTask('build-css', 'Build all the CSS Files', [
