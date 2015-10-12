@@ -20,3 +20,6 @@ app/public/js/bundles
 app/public/js/libs/*.js
 app/client/js/libs/*.js
 app/client/styl/libs/*.css
+
+# Compiled CSS
+app/public/css/*
