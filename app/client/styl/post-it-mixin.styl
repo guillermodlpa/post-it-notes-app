@@ -1,22 +1,15 @@
 $postItColor = #ffff88
 $postItLighterColor = #ffffc6
 
-$postItSize = 15rem // original 250px
-
 /////
 //// Post-It styles come originally from
 ///  http://mentormate.com/blog/css-postit-note/
 //
 
-.todo-list-item
+.post-it
 	position relative
-	display inline-block
 
-	width  $postItSize
-	min-height $postItSize
-	max-height $postItSize
-	padding 2.5rem 1.5rem 1rem 1.5rem
-	margin  0 1rem 3rem 1rem
+	padding 2.5em 1.5em 1em 1.5em
 
 	background $postItColor /* Old browsers */
 	background -moz-linear-gradient(-45deg, $postItColor 81%, $postItColor 82%, $postItColor 82%, $postItLighterColor 100%) /* FF3.6+ */
@@ -30,17 +23,18 @@ $postItSize = 15rem // original 250px
 
 	font-family "Comic Sans MS", cursive, sans-serif
 
-	border-bottom-right-radius 60px 5px
+	border-bottom-right-radius 37% 5%
 
 	// slight lighter color on the top of the post it
-	&:before
-		content ""
-		position absolute
-		top 0
-		width 100%
-		height 2.5rem
-		background-color #fdfd86
-		left 0
+	// &:before
+	// 	content ""
+	// 	position absolute
+	// 	top 0
+	// 	width 100%
+	// 	height 2.5rem
+	// 	background-color #fdfd86
+	// 	left 0
+	// 	z-index 0
 
 	// shadow in the bottom right corner
 	&:after
@@ -48,26 +42,14 @@ $postItSize = 15rem // original 250px
 		position absolute
 		right -0px
 		bottom 20px
-		width ($postItSize/2)
-		height 25px
+		width 50%
+		height 10%
 
 		z-index -1
 		background rgba(0, 0, 0, 0.2)
-		box-shadow 2px 15px 5px rgba(0, 0, 0, 0.40)
+		box-shadow 2px 20px 5px rgba(0, 0, 0, 0.40)
 		-moz-transform matrix(-1, -0.1, 0, 1, 0, 0)
 		-webkit-transform matrix(-1, -0.1, 0, 1, 0, 0)
 		-o-transform matrix(-1, -0.1, 0, 1, 0, 0)
 		-ms-transform matrix(-1, -0.1, 0, 1, 0, 0)
 		transform matrix(-1, -0.1, 0, 1, 0, 0)
-
-	// when selected
-	&.is-selected
-		border-color blue
-
-.item-delete
-	position absolute
-	bottom 1rem
-	right 1rem
-	display none
-	.is-selected &
-		display block

@@ -1,0 +1,26 @@
+$postItSize = 15rem // original 250px
+
+.todo-list-item
+	display inline-block
+
+	width  $postItSize
+	min-height $postItSize
+	max-height $postItSize
+
+	margin  0 1rem 3rem 1rem
+
+	// when selected
+	&.is-selected
+		border-color blue
+
+.item-content
+	position relative
+	outline none
+
+.item-delete
+	position absolute
+	bottom 1rem
+	right 1rem
+	display none
+	.is-selected &
+		display block

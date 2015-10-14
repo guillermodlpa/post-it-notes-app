@@ -1,7 +1,7 @@
 module.exports = Backbone.View.extend({
 
 	tagName: 'li',
-	className: 'todo-list-item',
+	className: 'todo-list-item post-it',
 
 	template: null,
 

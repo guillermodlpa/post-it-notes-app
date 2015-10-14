@@ -7,7 +7,7 @@ module.exports = Backbone.View.extend({
 
 	events: {
 		// sumbmission of the todo list item adder
-		'click #todoListAdderBtn': 'submitAddTodoListItem'
+		'click #todoListAdderBtn': 'onAddNewClick'
 	},
 
 	TodoListItemCollection: null,
@@ -63,32 +63,39 @@ module.exports = Backbone.View.extend({
 		return view.render().el;
 	},
 
-	submitAddTodoListItem: function( event ) {
+	// submitAddTodoListItem: function( event ) {
 
-		var _this = this;
+	// 	var _this = this;
 
-		$.ajax({
-			type: 'POST',
-			url: window.location.pathname + 'todo/add',
-			data: this.$adderForm.serialize(),
-			dataType: 'json'
-		})
-		.done( function( response ) {
+	// 	$.ajax({
+	// 		type: 'POST',
+	// 		url: window.location.pathname + 'todo/add',
+	// 		data: this.$adderForm.serialize(),
+	// 		dataType: 'json'
+	// 	})
+	// 	.done( function( response ) {
 
-			var todoListItem = response && response.data ? response.data : false;
+	// 		var todoListItem = response && response.data ? response.data : false;
 
-			if ( !todoListItem ) {
-				alert("Whoops, the adding didn't work as expected");
-				return;
-			}
+	// 		if ( !todoListItem ) {
+	// 			alert("Whoops, the adding didn't work as expected");
+	// 			return;
+	// 		}
 
-			// add a new model by passing its attributes to the collection
-			_this.TodoListItemCollection.add( todoListItem );
-		})
-		.fail( function() {
-			alert("Whoops, the adding failed");
+	// 		// add a new model by passing its attributes to the collection
+	// 		_this.TodoListItemCollection.add( todoListItem );
+	// 	})
+	// 	.fail( function() {
+	// 		alert("Whoops, the adding failed");
+	// 	});
+
+	// 	return false; // stop propagation
+	// },
+
+	onAddNewClick: function() {
+
+		this.TodoListItemCollection.add({
+			justCreated: true
 		});
-
-		return false; // stop propagation
-	}
+	},
 });
