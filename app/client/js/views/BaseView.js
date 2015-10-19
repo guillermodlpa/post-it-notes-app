@@ -36,6 +36,7 @@ module.exports = Backbone.View.extend({
 
 	render: function() {
 
+		this.initDraggable();
 	},
 
 	addOne: function( todoListItem ) {
@@ -63,39 +64,24 @@ module.exports = Backbone.View.extend({
 		return view.render().el;
 	},
 
-	// submitAddTodoListItem: function( event ) {
-
-	// 	var _this = this;
-
-	// 	$.ajax({
-	// 		type: 'POST',
-	// 		url: window.location.pathname + 'todo/add',
-	// 		data: this.$adderForm.serialize(),
-	// 		dataType: 'json'
-	// 	})
-	// 	.done( function( response ) {
-
-	// 		var todoListItem = response && response.data ? response.data : false;
-
-	// 		if ( !todoListItem ) {
-	// 			alert("Whoops, the adding didn't work as expected");
-	// 			return;
-	// 		}
-
-	// 		// add a new model by passing its attributes to the collection
-	// 		_this.TodoListItemCollection.add( todoListItem );
-	// 	})
-	// 	.fail( function() {
-	// 		alert("Whoops, the adding failed");
-	// 	});
-
-	// 	return false; // stop propagation
-	// },
-
 	onAddNewClick: function() {
 
 		this.TodoListItemCollection.add({
 			justCreated: true
+		}, {at:0} );
+	},
+
+	initDraggable: function (){
+
+		this.$listContainer.find('.todo-list-item').draggable({
+			delay: 100,
+			opacity: 0.9,
+			snap: true,
+			stack: true
 		});
 	},
+
+	destroyDraggable: function() {
+		this.$listContainer.find('.todo-list-item').draggable('destroy');
+	}
 });
