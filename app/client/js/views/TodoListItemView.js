@@ -2,6 +2,7 @@ module.exports = Backbone.View.extend({
 
 	tagName: 'li',
 	className: 'todo-list-item post-it',
+	idAttribute: '_id', // because mongoDB is weird and uses _id as primary key
 
 	template: null,
 
@@ -44,6 +45,9 @@ module.exports = Backbone.View.extend({
 
 		// generating markup from the Handlebars template passing model's attributes
 		this.$el.html( this.template( this.model.attributes ) );
+
+		// add the cid attribute, used to get model from markup
+		this.$el.data('cid', this.model.cid );
 
 		return this;
 	},
