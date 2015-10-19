@@ -15,10 +15,11 @@ node_modules
 app/public/js/bundles
 
 # Front-end libraries
-bower_modules
+bower_components
 app/public/js/libs
 app/client/js/libs
 app/client/styl/libs
 
-# Compiled CSS
-app/public/css/*
+# Compiles files
+app/public/css
+app/public/js

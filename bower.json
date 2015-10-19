@@ -1,0 +1,27 @@
+{
+  "name": "todo-list-mongo-backbone",
+  "description": "Post it notes on browser",
+  "main": "",
+  "authors": [
+    "Guillermo <g.puente.allott@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/gpuenteallott/mapins",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "^1.8.3",
+    "jquery": "^2.1.4",
+    "jquery-ui": "^1.11.4",
+    "backbone": "^1.2.3",
+    "handlebars": "^4.0.3",
+    "normalize-css": "normalize.css#^3.0.3"
+  }
+}
