@@ -8,18 +8,17 @@ log.txt
 
 *.lock
 
+# Back-end libraries
 node_modules
-
-# libs directory, generated contents with grunt build-js
-app/public/js/libs
 
 # browserified JS
 app/public/js/bundles
 
-# libraries that are copied with grunt copy from node_modules
-app/public/js/libs/*.js
-app/client/js/libs/*.js
-app/client/styl/libs/*.css
+# Front-end libraries
+bower_modules
+app/public/js/libs
+app/client/js/libs
+app/client/styl/libs
 
 # Compiled CSS
 app/public/css/*

@@ -77,7 +77,7 @@ module.exports = Backbone.View.extend({
 			delay: 100,
 			opacity: 0.9,
 			snap: true,
-			stack: true
+			// stack: true
 		});
 	},
 

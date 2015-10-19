@@ -10,7 +10,8 @@ window.todoListApp = {};
 window.Handlebars = require('handlebars');
 window.Backbone = require('backbone');
 window._ = require('underscore');
-window.$ = require('jquery'); // this guy is not actually aliased, but shimmed. Why? Other JS plugins could use it and we don't wanna load it twice or hide it
+window.$ = window.jQuery = require('jquery'); // this guy is not actually aliased, but shimmed. Why? Other JS plugins could use it and we don't wanna load it twice or hide it
+require('jquery-ui');
 
 // Insert jQuery and Underscore into Backbone scope
 Backbone.$ = $;
@@ -55,6 +56,8 @@ window.todoListApp = function() {
 	}
 }();
 
+module.exports = window.todoListApp;
+
 
 ////////////////////////////////
 // App Kick off
@@ -62,39 +65,3 @@ window.todoListApp = function() {
 $(function(){
 	window.todoListApp.init();
 });
-
-/*
-$(function(){
-
-	$.ajax({
-		url: window.location.pathname + 'todo'
-	})
-	.done(function( result ){
-		alert(result);
-	})
-	.fail(function(){
-		alert('fail');
-	});
-
-	var $adderForm = $('#todoListAdderForm');
-
-	// override default form behavior so it is an ajax submission
-	$adderForm.on('submit', function(){
-
-		$.ajax({
-			type: 'POST',
-			url: window.location.pathname + 'todo/new',
-			data: $adderForm.serialize()
-		})
-		.done( function( response ) {
-			alert(response);
-		})
-		.fail( function() {
-			alert('fail');
-		});
-
-		// stop submission
-		return false;
-	});
-
-});*/
