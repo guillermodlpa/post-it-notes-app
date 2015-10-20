@@ -2,16 +2,16 @@
 // routes/index.js
 
 var indexController = require("./IndexController");
-var todoListController = require("./todoListController");
+var postItNotesController = require("./postItNotesController");
 
 module.exports = function (app) {
 
 	app.get('/', indexController.index);
 
-	app.get('/todo', todoListController.index);
-	app.post('/todo/add', todoListController.add);
-	app.post('/todo/edit/:id', todoListController.edit);
-	app.post('/todo/remove/:id', todoListController.remove);
+	app.get('/post_it_note', postItNotesController.index);
+	app.post('/post_it_note/add', postItNotesController.add);
+	app.post('/post_it_note/edit/:id', postItNotesController.edit);
+	app.post('/post_it_note/remove/:id', postItNotesController.remove);
 
 	//app.get('/map', mapController.index);
 

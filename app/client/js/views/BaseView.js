@@ -1,5 +1,5 @@
-var TodoListItemCollection = require('../collections/todoListItemCollection');
-var TodoListItemView = require('./TodoListItemView')
+var PostItNoteCollection = require('../collections/PostItNoteCollection');
+var PostItNoteView = require('./PostItNoteView')
 
 module.exports = Backbone.View.extend({
 
@@ -7,10 +7,10 @@ module.exports = Backbone.View.extend({
 
 	events: {
 		// sumbmission of the todo list item adder
-		'click #todoListAdderBtn': 'onAddNewClick'
+		'click #adderBtn': 'onAddNewClick'
 	},
 
-	TodoListItemCollection: null,
+	PostItNoteCollection: null,
 	eventAggregator: null,
 
 	initialize: function( options ) {
@@ -18,18 +18,18 @@ module.exports = Backbone.View.extend({
 		// passing the global event aggregator for this app
 		this.eventAggregator = options.eventAggregator;
 
-		this.$listContainer = $('#todoListContainer');
-		this.$adderForm = $('#todoListAdderForm');
+		this.$postItNotesContainer = $('#postItNotesContainer');
+		this.$adderForm = $('#adderForm');
 
-		this.TodoListItemCollection = new TodoListItemCollection();
+		this.PostItNoteCollection = new PostItNoteCollection();
 
 		// for debugging
-		window.collection = this.TodoListItemCollection;
+		window.collection = this.PostItNoteCollection;
 
 		// listeners structure taken from Todos example from Backbone.js
-		this.listenTo( this.TodoListItemCollection, 'add', this.addOne );
-		this.listenTo( this.TodoListItemCollection, 'reset', this.allAll );
-		this.listenTo( this.TodoListItemCollection, 'all', this.render );
+		this.listenTo( this.PostItNoteCollection, 'add', this.addOne );
+		this.listenTo( this.PostItNoteCollection, 'reset', this.allAll );
+		this.listenTo( this.PostItNoteCollection, 'all', this.render );
 
 		this.render();
 	},
@@ -39,25 +39,25 @@ module.exports = Backbone.View.extend({
 		this.initDraggable();
 	},
 
-	addOne: function( todoListItem ) {
-		this.$listContainer.append( this.getMarkupForNewItem(todoListItem) );
+	addOne: function( postItNote ) {
+		this.$postItNotesContainer.append( this.getMarkupForNewPostItNote( postItNote ) );
 	},
 
 	addAll: function() {
 
 		var _this = this,
-			todoListItemsToAdd = [];
+			postItNotesToAdd = [];
 
-		this.TodoListItemCollection.each( function( thisModel ) {
-			todoListItemsToAdd.push( _this.getMarkupForNewItem(thisModel) );
+		this.PostItNoteCollection.each( function( thisModel ) {
+			postItNotesToAdd.push( _this.getMarkupForNewPostItNote(thisModel) );
 		});
 
-		this.$listContainer.append( todoListItemsToAdd );
+		this.$postItNotesContainer.append( postItNotesToAdd );
 	},
 
-	getMarkupForNewItem: function( todoListItem ) {
-		var view = new TodoListItemView({
-			model: todoListItem,
+	getMarkupForNewPostItNote: function( postItNote ) {
+		var view = new PostItNoteView({
+			model: postItNote,
 			eventAggregator: this.eventAggregator
 		});
 
@@ -66,24 +66,26 @@ module.exports = Backbone.View.extend({
 
 	onAddNewClick: function() {
 
-		this.TodoListItemCollection.add({
+		this.PostItNoteCollection.add({
 			justCreated: true
 		}, {at:0} );
 	},
 
 	initDraggable: function (){
 
-		this.$listContainer.find('.todo-list-item').draggable({
+		this.$postItNotesContainer.find('.post-it-note').draggable({
 			delay: 100,
 			opacity: 0.9,
 			snap: true,
+			snapTolerance: 3,
 			stop: function( event, ui ) {
-
+				// trigger like this the event for the view to catch it
+				ui.item.trigger('hasBeenDragged');
 			}
 		});
 	},
 
 	destroyDraggable: function() {
-		this.$listContainer.find('.todo-list-item').draggable('destroy');
+		this.$postItNotesContainer.find('.post-it-note').draggable('destroy');
 	}
 });

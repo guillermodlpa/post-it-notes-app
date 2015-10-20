@@ -1,5 +1,5 @@
 {
-	"name": "todo-list-mongo-backbone",
+	"name": "post-it-notes-app",
 	"version": "0.1.0",
 	"browserify-shim": {
 		"jquery": "global:jQuery"

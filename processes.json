@@ -1,6 +1,6 @@
 {
   "apps" : [{
-	"name"        : "TODO List",
+	"name"        : "Post It Notes App",
 	"script"      : "app/app.js",
 	"error_file"  : "logs/todo_list_error.log",
 	"out_file"    : "logs/todo_list_out.log",

@@ -19,7 +19,7 @@ module.exports = {
 		//     external: ['source-map', 'jquery']
 		// },
 		files: {
-			'app/public/js/bundles/todo-list-app.js': ['app/client/js/todo-list-app.js']
+			'app/public/js/bundles/post-it-notes-app.js': ['app/client/js/post-it-notes-app.js']
 		}
 	}
 }
