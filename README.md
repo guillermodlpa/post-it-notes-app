@@ -12,7 +12,7 @@ Project to get familiar with:
 1. Add to /etc/hosts:
 
     ```
-    192.168.56.101  local.mapins.com
+    192.168.56.101  local.postitnotesapp.com
     ```
 
 2. Install back-end dependencies. Maybe sudo needed

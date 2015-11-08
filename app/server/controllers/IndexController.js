@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 
 // Database name is set on config.yaml, the puphpet file
-var mongoDbUrl = "mongodb://localhost:27017/local_todo_list";
+var mongoDbUrl = "mongodb://localhost:27017/local_post_it_notes_app";
 
 exports.index = function( request, response, next ) {
 	// response.writeHead(200, {'Content-Type': 'text/plain'});

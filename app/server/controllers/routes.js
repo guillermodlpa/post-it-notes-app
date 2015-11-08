@@ -9,11 +9,10 @@ module.exports = function (app) {
 	app.get('/', indexController.index);
 
 	app.get('/post_it_note', postItNotesController.index);
-	app.post('/post_it_note/add', postItNotesController.add);
-	app.post('/post_it_note/edit/:id', postItNotesController.edit);
-	app.post('/post_it_note/remove/:id', postItNotesController.remove);
 
-	//app.get('/map', mapController.index);
-
-	// app.get('/:username', mapController.index);
+	// RESTful API for post it notes
+	app.get('/post_it_note/:id', postItNotesController.get);
+	app.post('/post_it_note', postItNotesController.add);
+	app.put('/post_it_note/:id', postItNotesController.edit);
+	app.delete('/post_it_note/:id', postItNotesController.remove);
 }

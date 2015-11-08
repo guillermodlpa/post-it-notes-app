@@ -13,8 +13,11 @@ var app = express();
 app.set( 'view engine', 'ejs');
 app.use( partials() );
 
-//Here we are configuring express to use body-parser as middle-ware.
+// Returns middleware that only parses urlencoded bodies
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json request parameters. BackboneJS sends params in json format by default
+app.use(bodyParser.json());
 
 // all routes are in controllers/routes.js
 var routes = require('./server/controllers/routes')(app);

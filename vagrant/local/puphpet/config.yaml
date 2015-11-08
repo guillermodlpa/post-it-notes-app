@@ -351,9 +351,9 @@ mongodb:
         port: '27017'
     databases:
         mongodbnuad_orwx8ughxl6m:
-            name: local_mapins
-            user: mapins
-            password: mapins
+            name: local_post_it_notes_app
+            user: postitnotesapp
+            password: postitnotesapp
 redis:
     install: '0'
     settings:

@@ -66,9 +66,7 @@ module.exports = Backbone.View.extend({
 
 	onAddNewClick: function() {
 
-		this.PostItNoteCollection.add({
-			justCreated: true
-		}, {at:0} );
+		this.PostItNoteCollection.add({}, {at:0} );
 	},
 
 	initDraggable: function (){
