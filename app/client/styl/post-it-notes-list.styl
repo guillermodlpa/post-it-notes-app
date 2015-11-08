@@ -1,0 +1,29 @@
+$postItSize = 15rem // original 250px
+
+.post-it-note
+
+	postItNote()
+
+	display inline-block
+
+	width  $postItSize
+	min-height $postItSize
+	max-height $postItSize
+
+	margin  0 1rem 3rem 1rem
+
+	// when selected
+	&.is-selected
+		border-color blue
+
+.post-it-note-content
+	position relative
+	outline none
+
+.post-it-note-delete
+	position absolute
+	bottom 1rem
+	right 1rem
+	display none
+	.is-selected &
+		display block
