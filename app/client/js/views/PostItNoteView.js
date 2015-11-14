@@ -3,7 +3,7 @@ module.exports = Backbone.View.extend({
 	tagName: 'li',
 	className: 'post-it-note',
 
-	template: null,
+	template: require('../templates/post-it-note-template.hbs'),
 
 	events: {
 		// on desktop, selecting happens on hover
@@ -36,9 +36,6 @@ module.exports = Backbone.View.extend({
 
 		// bind to the item selected event from the global event aggregator, so that if another card opens, we close
 		this.eventAggregator.bind('post-it-note-selected', _.bind( this.deselectPostItNoteUnlessMyself, this ) );
-
-		// compile with Handlebars the template, in a <script> tag on the markup
-		this.template = Handlebars.compile( $("#postItNoteTemplate").html() );
 
 		this.render();
 	},

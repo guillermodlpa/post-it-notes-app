@@ -13,11 +13,11 @@ module.exports = {
 		}
 	},
 	main: {
-		// options: {
-		//     // transform: ['uglifyify'],
-		//     // transform: ['browserify-shim'],
-		//     external: ['source-map', 'jquery']
-		// },
+		options: {
+		    transform: ['hbsfy'],
+		    // transform: ['browserify-shim'],
+		    // external: ['source-map', 'jquery']
+		},
 		files: {
 			'app/public/js/bundles/post-it-notes-app.js': ['app/client/js/post-it-notes-app.js']
 		}
