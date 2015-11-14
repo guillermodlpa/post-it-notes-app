@@ -47,8 +47,19 @@ module.exports = Backbone.View.extend({
 
 		// generating markup from the Handlebars template passing model's attributes
 		this.$el.html( this.template( this.model.attributes ) );
+		this.$el.data('_id', this.model.get('_id'));
 
 		this.$contentEditable = this.$el.find('.post-it-note-content');
+
+		// place post it note in the right saved spot
+		var coords = this.model.get('coords');
+		if ( coords.top !== -1 && coords.left !== -1 ) {
+			this.$el.css({
+				'position': 'absolute',
+				'top': coords.top,
+				'left': coords.left,
+			});
+		}
 
 		// Solve draggable - contentEditable conflicts
 		// http://stackoverflow.com/questions/10317128/how-to-make-a-div-contenteditable-and-draggable#answer-14952271
@@ -157,16 +168,7 @@ module.exports = Backbone.View.extend({
 			var contentHtml = _this.$el.find('.post-it-note-content').html();
 
 			// only save when there is content
-			_this.model.save({content: contentHtml}, {
-				wait: false, // wait true would be used to update model after success. Default is false, but left this here for learning purposes
-				success: function(model, response) {
-					console.log('Successfully saved!');
-				},
-				error: function(model, error) {
-					console.log(model.toJSON()); // this log would be removed in prod
-					console.log(error.responseText);
-				}
-			});
+			_this._save({content: contentHtml});
 		}, 1000);
 	},
 
@@ -174,6 +176,24 @@ module.exports = Backbone.View.extend({
 	 * triggered when the item has been dragged
 	 */
 	afterDragging: function() {
+		this._save({coords: this.$el.offset()});
+	},
 
+	/**
+	 * private function for saving attributes, and logging success or error
+	 * @param  {object} attributesToSave
+	 */
+	_save: function( attributesToSave ) {
+
+		this.model.save( attributesToSave, {
+			wait: false, // wait true would be used to update model after success. Default is false, but left this here for learning purposes
+			success: function(model, response) {
+				console.log('Successfully saved!');
+			},
+			error: function(model, error) {
+				console.log(model.toJSON()); // this log would be removed in prod
+				console.log(error.responseText);
+			}
+		});
 	}
 });

@@ -77,9 +77,10 @@ module.exports = Backbone.View.extend({
 			snap: true,
 			snapTolerance: 3,
 			stop: function( event, ui ) {
-				// trigger like this the event for the view to catch it
-				// ui.item.trigger('hasBeenDragged');
-			}
+				// trigger jQuery event on the view element directly
+				$(event.target).trigger('hasBeenDragged');
+
+			}.bind(this)
 		});
 	},
 

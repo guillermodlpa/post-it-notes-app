@@ -4,7 +4,10 @@ var mongoose = require("mongoose");
 var postItNotesSchema = mongoose.Schema({
 	content: String,
 	date: {type: Date, default: Date.now},
-	coords: {top: Number, left: Number }
+	coords: {
+		top: {type: Number, default: -1},
+		left: {type: Number, default: -1}
+	}
 });
 
 // create model

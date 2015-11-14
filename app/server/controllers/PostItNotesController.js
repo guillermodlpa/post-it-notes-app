@@ -149,6 +149,11 @@ function edit( req, res, next ) {
 		return;
 	}
 
+	// we save all the body passed, but for safety we remove stuff that wouldn't be edited
+	delete req.body._id;
+	delete req.body._v;
+	delete req.body.date;
+
 	mongoose.connect(mongoDbUrl);
 	var db = mongoose.connection;
 	db.on('error', function(){
@@ -156,7 +161,7 @@ function edit( req, res, next ) {
 	});
 	db.once('open', function (callback) {
 
-		PostItNoteModel.update({_id: postItNoteId}, {content: req.body.content }, function( err, raw ) {
+		PostItNoteModel.update({_id: postItNoteId}, req.body, function( err, raw ) {
 
 			if ( err ) {
 				_sendError( res, 'errorRemovingFromDb' );

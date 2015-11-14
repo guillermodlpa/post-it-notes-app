@@ -11,8 +11,8 @@ module.exports = Backbone.Model.extend({
 		content: '',
 		date: null,
 		coords: {
-			left: 0,
-			top: 0
+			left: -1,
+			top: -1
 		}
 	},
 
