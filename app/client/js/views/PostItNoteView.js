@@ -48,7 +48,30 @@ module.exports = Backbone.View.extend({
 		// generating markup from the Handlebars template passing model's attributes
 		this.$el.html( this.template( this.model.attributes ) );
 
-		this.$el.find('.post-it-note-content').prop('contentEditable',true);
+		this.$contentEditable = this.$el.find('.post-it-note-content');
+
+		// Solve draggable - contentEditable conflicts
+		// http://stackoverflow.com/questions/10317128/how-to-make-a-div-contenteditable-and-draggable#answer-14952271
+		this.$contentEditable.on('click', function() {
+
+			// if being dragged, cancel
+			if ( this.$el.is('.ui-draggable-dragging').length ) {
+				return;
+			}
+
+			// disable dragging
+			this.$el.draggable( "option", "disabled", true );
+
+			// enable content editing
+    		this.$contentEditable.attr('contenteditable','true').focus();
+		}.bind(this) )
+		.blur(function(){
+			// enable dragging
+			this.$el.draggable( 'option', 'disabled', false);
+
+			// disable content editing
+			this.$contentEditable.attr('contenteditable','false');
+		}.bind(this) );
 
 		return this;
 	},

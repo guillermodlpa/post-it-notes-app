@@ -78,7 +78,7 @@ module.exports = Backbone.View.extend({
 			snapTolerance: 3,
 			stop: function( event, ui ) {
 				// trigger like this the event for the view to catch it
-				ui.item.trigger('hasBeenDragged');
+				// ui.item.trigger('hasBeenDragged');
 			}
 		});
 	},
