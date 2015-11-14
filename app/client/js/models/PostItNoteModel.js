@@ -8,7 +8,7 @@ module.exports = Backbone.Model.extend({
 
 	defaults: {
 		_id: null,
-		content: '',
+		content: 'Write me!',
 		date: null,
 		coords: {
 			left: -1,
