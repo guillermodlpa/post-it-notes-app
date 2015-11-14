@@ -1,5 +1,7 @@
 # Post It Notes App
 
+Web app to interact with a post it notes wall. Optimized for mobile.
+
 Project to get familiar with:
 
 * Vagrant, puphpet
