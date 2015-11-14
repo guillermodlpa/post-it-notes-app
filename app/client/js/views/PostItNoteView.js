@@ -186,6 +186,7 @@ module.exports = Backbone.View.extend({
 	_save: function( attributesToSave ) {
 
 		this.model.save( attributesToSave, {
+			patch: true, // save only the changed attributes
 			wait: false, // wait true would be used to update model after success. Default is false, but left this here for learning purposes
 			success: function(model, response) {
 				console.log('Successfully saved!');

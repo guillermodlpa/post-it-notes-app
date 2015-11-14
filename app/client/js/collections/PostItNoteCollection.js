@@ -11,6 +11,6 @@ module.exports = Backbone.Collection.extend({
 	},
 
 	parse: function(response) {
-		return response && response.data ? response.data : [];
+		return response ? response : [];
 	},
 });

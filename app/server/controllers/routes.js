@@ -13,6 +13,6 @@ module.exports = function (app) {
 	// RESTful API for post it notes
 	app.get('/post_it_note/:id', postItNotesController.get);
 	app.post('/post_it_note', postItNotesController.add);
-	app.put('/post_it_note/:id', postItNotesController.edit);
+	app.patch('/post_it_note/:id', postItNotesController.edit);
 	app.delete('/post_it_note/:id', postItNotesController.remove);
 }

@@ -74,11 +74,12 @@ function get( req, res, next ) {
 
 function add( req, res, next ) {
 
-	console.log('PostItNotesController: add');
-	console.log(req.body);
+	console.log( Date() + ' PostItNotesController: add');
 
-	// get parameter with post it note content
-	var postItNoteContent = typeof req.body.content !== 'undefined' ? req.body.content : '...';
+	var updates = req.body;
+
+	// make sure ID is not present, this is a new item
+	delete updates._id;
 
 	// prepare DB
 	mongoose.connect(mongoDbUrl);
@@ -88,7 +89,7 @@ function add( req, res, next ) {
 	});
 	db.once('open', function (callback) {
 
-		var postItNote = new PostItNoteModel({ content: postItNoteContent });
+		var postItNote = new PostItNoteModel( updates );
 
 		// save to db
 		postItNote.save(function (err, fluffy) {
@@ -105,7 +106,7 @@ function add( req, res, next ) {
 
 function remove( req, res, next ) {
 
-	console.log('PostItNotesController: remove');
+	console.log( Date() + ' PostItNotesController: remove');
 
 	var postItNoteId = req.params.id;
 
@@ -137,7 +138,7 @@ function remove( req, res, next ) {
 
 function edit( req, res, next ) {
 
-	console.log('PostItNotesController: edit');
+	console.log( Date() + ' PostItNotesController: edit');
 	// console.log(req.body);
 	// console.log(req.params);
 
@@ -149,11 +150,6 @@ function edit( req, res, next ) {
 		return;
 	}
 
-	// we save all the body passed, but for safety we remove stuff that wouldn't be edited
-	delete req.body._id;
-	delete req.body._v;
-	delete req.body.date;
-
 	mongoose.connect(mongoDbUrl);
 	var db = mongoose.connection;
 	db.on('error', function(){
@@ -164,9 +160,9 @@ function edit( req, res, next ) {
 		PostItNoteModel.update({_id: postItNoteId}, req.body, function( err, raw ) {
 
 			if ( err ) {
-				_sendError( res, 'errorRemovingFromDb' );
+				_sendError( res, 'updatingDb', req.body );
 			} else {
-				_sendResponse( res );
+				_sendResponse( res, req.body );
 			}
 			db.close();
 		});
@@ -177,10 +173,11 @@ function edit( req, res, next ) {
  * little helper function to send back JSON encoded responses
  */
 function _sendResponse( response, object ) {
-	response.end( JSON.stringify({
-		status: 'success',
-		data: object
-	}));
+
+	object = object || {};
+	object.status = 'success'; // wont do anything when object is an array
+
+	response.end( JSON.stringify(object));
 }
 /**
  * little helper function to send back JSON encoded ERROR responses
