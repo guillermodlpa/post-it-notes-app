@@ -6,6 +6,13 @@
 *, *:after, *:before
 	box-sizing border-box
 
+// Mixin for vendors
+vendor(prop, args)
+	-webkit-{prop} args
+	-moz-{prop} args
+	-ms-{prop} args
+	-o-{prop} args
+	{prop} args
 
 ///////////////////
 // App components

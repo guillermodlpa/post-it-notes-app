@@ -25,17 +25,6 @@ postItNote()
 
 	border-bottom-right-radius 37% 5%
 
-	// slight lighter color on the top of the post it
-	// &:before
-	// 	content ""
-	// 	position absolute
-	// 	top 0
-	// 	width 100%
-	// 	height 2.5rem
-	// 	background-color #fdfd86
-	// 	left 0
-	// 	z-index 0
-
 	// shadow in the bottom right corner
 	&:after
 		content ""
@@ -48,14 +37,17 @@ postItNote()
 		z-index -1
 		background rgba(0, 0, 0, 0.2)
 		box-shadow 2px 20px 5px rgba(0, 0, 0, 0.40)
-		-moz-transform matrix(-1, -0.1, 0, 1, 0, 0)
-		-webkit-transform matrix(-1, -0.1, 0, 1, 0, 0)
-		-o-transform matrix(-1, -0.1, 0, 1, 0, 0)
-		-ms-transform matrix(-1, -0.1, 0, 1, 0, 0)
-		transform matrix(-1, -0.1, 0, 1, 0, 0)
+		vendor('transform', matrix(-1, -0.1, 0, 1, 0, 0));
 
 	&.ui-draggable-dragging
 
 		box-shadow 5px 20px 20px -5px rgba(0,0,0,.4)
+
 		&:after
 			display none
+
+	[contentEditable]
+		cursor text
+	.post-it-note-button
+		cursor pointer
+		vendor('user-select', 'none');

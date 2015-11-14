@@ -6,7 +6,8 @@ module.exports = {
 	},
 	'build-js': {
 		files: [
-			'./app/client/js/**/*.js'
+			'./app/client/js/**/*.js',
+			'./app/client/js/**/*.hbs'
 		],
 		tasks: [
 			'build-js'
