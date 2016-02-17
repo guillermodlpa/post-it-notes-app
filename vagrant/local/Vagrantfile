@@ -12,6 +12,14 @@ end
 
 data = configValues['vagrantfile']
 
+# adding this rules here to fix vagrant 1.7+ problem with sshing
+# https://github.com/mitchellh/vagrant/issues/5186
+Vagrant.configure("2") do |config|
+  config.ssh.password = "vagrant"
+  config.ssh.insert_key = false
+end
+
 Vagrant.require_version '>= 1.6.0'
 
 eval File.read("#{dir}/puphpet/vagrant/Vagrantfile-#{data['target']}")
+
