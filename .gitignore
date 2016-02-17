@@ -1,7 +1,7 @@
 vagrant/.vagrant
 vagrant/**/.vagrant
 vagrant/local/.vagrant
-vagrant/local/.vagrant/*
+vagrant/local_old
 
 logs/
 *.log
