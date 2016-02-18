@@ -39,7 +39,7 @@ vagrantfile:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
             vflsf_k39o85rq6flb:
-                source: ./
+                source: ../../ # IMPORTANT, we sync the folder of the project
                 target: /var/www
                 sync_type: default
                 smb:
@@ -100,7 +100,19 @@ locale:
         timezone: UTC
 firewall:
     install: '1'
-    rules: {  }
+    rules:
+        fr_ju7hgzvq4sxu:
+            port:
+                - '8000'
+            priority: '100'
+            proto: tcp
+            action: accept
+        fr_gbeh92b4e77t:
+            port:
+                - '80'
+            priority: '100'
+            proto: tcp
+            action: accept
 cron:
     install: '1'
     jobs: {  }
