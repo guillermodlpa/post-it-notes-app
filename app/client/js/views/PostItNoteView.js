@@ -6,6 +6,7 @@ module.exports = Backbone.View.extend({
 	tagName: 'li',
 	className: 'post-it-note',
 
+	// requiring .hbs file with hbsify
 	template: require('../templates/post-it-note-template.hbs'),
 
 	events: {
