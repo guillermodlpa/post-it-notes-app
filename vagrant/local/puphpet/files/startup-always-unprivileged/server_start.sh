@@ -15,4 +15,4 @@ echo "" >> /var/www/logs/vagrant.log
 echo "$(date) - server_start.sh" >> /var/www/logs/vagrant.log
 
 #package installed in exec_once
-#cd /var/www && pm2 start processes.json
+cd /var/www && pm2 start processes.json
