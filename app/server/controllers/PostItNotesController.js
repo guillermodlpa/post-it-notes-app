@@ -27,6 +27,7 @@ function index( req, res, next ) {
 	var db = mongoose.connection;
 	db.on('error', function(){
 		_sendError( res, 'errorOpeningDbConnection' );
+		db.close();
 	});
 	db.once('open', function (callback) {
 
