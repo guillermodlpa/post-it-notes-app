@@ -306,8 +306,6 @@ nodejs:
     install: '1'
     settings:
         version: '5'
-    npm_packages:
-        - pm2
 hhvm:
     install: '0'
     nightly: 0
