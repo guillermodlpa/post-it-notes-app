@@ -27,6 +27,9 @@ vagrantfile:
                                 vflmnfp_cbts7lb82zep:
                                     host: '5840'
                                     guest: '22'
+                                # vflnp_ttp2itpgzc0u:
+                                #     host: '8000' # node.js app
+                                #     guest: '80'
                         hostname: machine1.puphpet
                         memory: '512'
                         cpus: '1'
@@ -104,11 +107,6 @@ firewall:
         fr_ju7hgzvq4sxu:
             port:
                 - '8000'
-            priority: '100'
-            proto: tcp
-            action: accept
-        fr_gbeh92b4e77t:
-            port:
                 - '80'
             priority: '100'
             proto: tcp

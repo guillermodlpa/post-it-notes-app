@@ -1,5 +1,7 @@
+var Backbone = require('backbone');
+
 var PostItNoteCollection = require('../collections/PostItNoteCollection');
-var PostItNoteView = require('./PostItNoteView')
+var PostItNoteView = require('./PostItNoteView');
 
 module.exports = Backbone.View.extend({
 

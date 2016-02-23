@@ -15,6 +15,7 @@
     "mongoose": "^4.1.7"
   },
   "devDependencies": {
+    "backbone": "^1.2.3",
     "bower": "^1.6.3",
     "browserify-shim": "^3.8.10",
     "glob": "^3.2.9",
@@ -23,9 +24,11 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-stylus": "^0.22.0",
     "grunt-contrib-watch": "^0.6.1",
+    "handlebars": "^4.0.5",
     "hbsfy": "^2.4.1",
     "load-grunt-tasks": "~0.4.0",
-    "stylus": "^0.52.4"
+    "stylus": "^0.52.4",
+    "underscore": "^1.8.3"
   },
   "engines": {
     "node": ">=0.10.0"

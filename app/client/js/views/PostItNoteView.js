@@ -1,3 +1,6 @@
+var Backbone = require('backbone');
+var _ = require('handlebars');
+
 module.exports = Backbone.View.extend({
 
 	tagName: 'li',
