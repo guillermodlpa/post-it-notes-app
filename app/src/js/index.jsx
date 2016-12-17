@@ -1,21 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { render } from 'react-dom';
+import App from './components/App';
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      content: 'a',
-    };
-  }
-  render() {
-    return (
-      <div className="shopping-list">
-        <ul>
-          <li>Instagram</li>
-          <li>WhatsApp</li>
-          <li>Oculus</li>
-        </ul>
-      </div>
-    );
-  }
-}
+render(
+  <App />,
+  document.getElementById('app-container'),
+);
