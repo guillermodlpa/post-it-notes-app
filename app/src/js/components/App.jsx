@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import {
+  getPostItNotes,
+} from '../client';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      // TODO: fill this guy.
+      postItNotes: [],
     };
+  }
+  componentDidMount() {
+    getPostItNotes()
+      .then(response => this.setState({
+        postItNotes: response,
+      }))
+    ;
   }
   render() {
     return (
@@ -15,7 +25,11 @@ export default class App extends Component {
             <span>+</span>
           </div>
         </div>
-        <ul id="postItNotesContainer" />
+        <ul id="postItNotesContainer">
+          {this.state.postItNotes.map((/* object, i*/) => (
+            <div>Post It Note</div>
+          ))}
+        </ul>
       </div>
     );
   }
