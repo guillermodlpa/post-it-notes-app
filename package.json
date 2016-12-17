@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --compilers js:babel-core/register app/tests/js/**/*.test.js*",
     "start": "babel-node server/index.js --presets es2015,stage-2"
   },
   "repository": {
@@ -25,7 +25,9 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "ejs": "^2.5.5",
+    "enzyme": "^2.6.0",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -37,11 +39,14 @@
     "gulp-babel": "^6.1.2",
     "gulp-size": "^2.1.0",
     "gulp-stylus": "^2.6.0",
+    "jsdom": "^9.8.3",
+    "mocha": "^3.2.0",
     "mongo-express": "^0.33.0",
     "mongodb": "^2.2.16",
     "mongoose": "^4.7.3",
     "pm2": "^2.2.2",
     "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "webpack": "^1.14.0",
     "webpack-stream": "^3.2.0"

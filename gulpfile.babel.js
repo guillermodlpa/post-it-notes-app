@@ -4,6 +4,17 @@ import size from 'gulp-size';
 import stylus from 'gulp-stylus';
 import webpackStream from 'webpack-stream';
 
+gulp.task('css', () => (
+  gulp
+    .src('app/src/stylus/index.styl')
+    .pipe(size({
+      showFiles: true,
+      showTotal: false,
+    }))
+    .pipe(stylus())
+    .pipe(gulp.dest('app/build/css/'))
+));
+
 gulp.task('js', () => (
   gulp
     .src('app/src/js/index.jsx')
@@ -22,19 +33,14 @@ gulp.task('js', () => (
           },
         ],
       },
+      externals: {
+        // for testing. more info: http://airbnb.io/enzyme/docs/guides/webpack.html
+        'react/addons': true,
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
+      },
     }))
     .pipe(gulp.dest('app/build/js'))
-));
-
-gulp.task('css', () => (
-  gulp
-    .src('app/src/stylus/index.styl')
-    .pipe(size({
-      showFiles: true,
-      showTotal: false,
-    }))
-    .pipe(stylus())
-    .pipe(gulp.dest('app/build/css/'))
 ));
 
 gulp.task('default', ['js', 'stylus']);
