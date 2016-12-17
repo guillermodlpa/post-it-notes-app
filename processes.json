@@ -1,15 +1,15 @@
 {
   "apps" : [{
 	"name"        : "Post It Notes App",
-	"script"      : "app/app.js",
+	"script"      : "app/index.js",
 	"error_file"  : "logs/todo_list_error.log",
 	"out_file"    : "logs/todo_list_out.log",
 	"pid_file"    : "logs/todo_list.pid",
 	"watch"       : true,
-	// options documentation -> https://github.com/paulmillr/chokidar#api
+	/* options documentation -> https://github.com/paulmillr/chokidar#api */
 	"watch_options" : {
-		// needed for the watch to track file changes thru vagrant
-		// https://github.com/Unitech/PM2/issues/1062#issuecomment-122317025
+		/* needed for the watch to track file changes thru vagrant */
+		/* https://github.com/Unitech/PM2/issues/1062#issuecomment-122317025 */
 		"usePolling": true
 	}
   }]

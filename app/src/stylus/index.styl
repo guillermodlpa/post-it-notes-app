@@ -1,0 +1,19 @@
+@require 'normalize'
+
+// forcing border box to everything
+*, *:after, *:before
+	box-sizing border-box
+
+// Mixin for vendors
+vendor(prop, args)
+	-webkit-{prop} args
+	-moz-{prop} args
+	-ms-{prop} args
+	-o-{prop} args
+	{prop} args
+
+///////////////////
+// App components
+@require 'post-it-note-mixin'
+@require 'post-it-note-list'
+@require 'adder'
