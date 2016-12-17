@@ -3,6 +3,7 @@ import {
   getPostItNotes,
   addPostItNote,
 } from '../client';
+import PostItNote from './PostItNote';
 
 export default class App extends Component {
   constructor() {
@@ -35,9 +36,11 @@ export default class App extends Component {
             <span>+</span>
           </button>
         </div>
-        <ul id="postItNotesContainer">
-          {this.state.postItNotes.map((/* object, i*/) => (
-            <div>Post It Note</div>
+        <ul>
+          {this.state.postItNotes.map(object/* , i*/ => (
+            <PostItNote
+              {...object}
+            />
           ))}
         </ul>
       </div>
