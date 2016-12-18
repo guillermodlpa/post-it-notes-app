@@ -2,6 +2,7 @@
 import gulp from 'gulp';
 import size from 'gulp-size';
 import stylus from 'gulp-stylus';
+import gutil from 'gulp-util';
 import webpackStream from 'webpack-stream';
 
 gulp.task('css', () => (
@@ -19,6 +20,7 @@ gulp.task('js', () => (
   gulp
     .src('app/src/js/index.jsx')
     .pipe(webpackStream({
+      watch: gutil.env.watch,
       output: {
         filename: 'index.js',
       },

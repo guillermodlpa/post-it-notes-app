@@ -3,5 +3,5 @@
 export const apiUrl = 'http://localhost:8000';
 
 export const headers = new Headers({
-  'Content-Type': 'text/json',
+  'Content-Type': 'application/json',
 });
