@@ -9,6 +9,7 @@ export default class PostItNote extends Component {
     this.onContentChanged = this.onContentChanged.bind(this);
     this.select = this.select.bind(this);
     this.unselect = this.unselect.bind(this);
+    this.delete = this.delete.bind(this);
   }
   onContentChanged(event) {
     this.props.onContentChanged(this.props.id, event.target.textContent);
@@ -20,6 +21,10 @@ export default class PostItNote extends Component {
   unselect() {
     this.props.onUnselect(this.props.id);
   }
+  delete() {
+    // @TODO
+  }
+
 
   render() {
     const isSelected = this.props.isSelected;
@@ -40,9 +45,12 @@ export default class PostItNote extends Component {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: this.props.content || '' }}
         />
-        <div className="post-it-note-button post-it-note-delete">
+        <button
+          className="post-it-note-button post-it-note-delete"
+          onClick={this.delete}
+        >
           Delete
-        </div>
+        </button>
       </li>
     );
   }
