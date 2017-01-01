@@ -12,9 +12,12 @@ export default class App extends Component {
     super();
     this.state = {
       postItNotes: [],
+      selectedPostItNoteId: null,
     };
     this.onAdderBtnClick = this.onAdderBtnClick.bind(this);
     this.onContentChanged = this.onContentChanged.bind(this);
+    this.onNoteSelected = this.onNoteSelected.bind(this);
+    this.onNoteUnselected = this.onNoteUnselected.bind(this);
   }
   componentDidMount() {
     getPostItNotes()
@@ -47,6 +50,15 @@ export default class App extends Component {
 
     editPostItNoteContentDebounced(postItNote.id, postItNote.content);
   }
+
+  onNoteSelected(selectedPostItNoteId) {
+    this.setState({ selectedPostItNoteId });
+  }
+  onNoteUnselected(postItNoteId) {
+    if (this.state.selectedPostItNoteId === postItNoteId) {
+      this.setState({ selectedPostItNoteId: null });
+    }
+  }
   render() {
     return (
       <div>
@@ -60,7 +72,10 @@ export default class App extends Component {
             <PostItNote
               key={i}
               {...object}
+              isSelected={this.state.selectedPostItNoteId === object.id}
               onContentChanged={this.onContentChanged}
+              onSelect={this.onNoteSelected}
+              onUnselect={this.onNoteUnselected}
             />
           ))}
         </ul>

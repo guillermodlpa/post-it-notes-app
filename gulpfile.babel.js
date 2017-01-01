@@ -45,4 +45,4 @@ gulp.task('js', () => (
     .pipe(gulp.dest('app/build/js'))
 ));
 
-gulp.task('default', ['js', 'stylus']);
+gulp.task('default', ['js', 'css']);
