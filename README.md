@@ -1,39 +1,40 @@
 # Post It Notes App
 
-Web app to interact with a post it notes wall. Optimized for mobile.
+Web app to interact with a post it notes wall.
 
 Project to get familiar with:
 
-* Vagrant, puphpet
-* Node.js
-* Backbone
+* React
+* Gulp
 * MongoDB
 
-## Setup
+Checkout vagrant-backbone branch to see old implementation using BackboneJS and vagrant.
 
-1. Add to /etc/hosts:
+## Setup for local development.
 
-    ```
-    192.168.56.101  local.postitnotesapp.com
-    ```
-
-2. Install back-end dependencies. Maybe sudo needed
+1. Install dependencies.
 
     ```
     npm install
     ```
 
-3. Install front-end dependencies.
+2. Compile js and css resources.
 
     ```
-    bower install
+    gulp
     ```
 
-4. Start VM
+2. Start MongoDB server.
 
     ```
-    cd vagrant/local
-    vagrant up
+    mongod --config mongod.conf
     ```
 
+3. Kick off app.
+
+    ```
+    npm start
+    ```
+
+   Access it at `http://localhost:8000/`.
 

@@ -1,0 +1,9 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/sort-comp": "off",
+    "array-callback-return": "off",
+    "no-plusplus": "off"
+  }
+}

@@ -9,14 +9,10 @@ log.txt
 
 *.lock
 
-# Back-end libraries
-node_modules
-
 # browserified JS
 app/public/js/bundles
 
 # Front-end libraries
-bower_components
 app/public/js/libs
 app/client/js/libs
 app/client/styl/libs
@@ -24,3 +20,10 @@ app/client/styl/libs
 # Compiles files
 app/public/css
 app/public/js
+
+mongodb-data/*
+!mongodb-data/.gitkeep
+
+node_modules
+app/build/*
+!app/build/.gitkeep
