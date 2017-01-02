@@ -1,6 +1,11 @@
 import debounce from 'debounce';
 import { apiUrl, headers } from '../config';
 
+/**
+ * Utility function to transform the key _id to id.
+ * @param  {object} item
+ * @return {object}
+ */
 function getItemWithoutUnderscoreId(item) {
   /* eslint-disable no-underscore-dangle */
   const newItem = Object.assign({}, item);
@@ -69,4 +74,3 @@ export function deletePostItNoteContent(id) {
 }
 
 export const editPostItNoteContentDebounced = debounce(editPostItNoteContent, 350);
-

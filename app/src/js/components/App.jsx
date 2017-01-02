@@ -12,18 +12,26 @@ import {
   getRandomId,
 } from '../utils';
 
+/**
+ * Main App component wrapping everything.
+ */
 export default class App extends Component {
   constructor() {
     super();
+
+    // initial component state.
     this.state = {
       postItNotes: [],
       selectedPostItNoteId: null,
     };
+
+    // binds here to avoid .bind(this) in other places.
     this.onAdderBtnClick = this.onAdderBtnClick.bind(this);
     this.onContentChanged = this.onContentChanged.bind(this);
     this.onPostItNoteSelected = this.onPostItNoteSelected.bind(this);
     this.onPostItNoteUnselected = this.onPostItNoteUnselected.bind(this);
     this.onPostItNoteDeleted = this.onPostItNoteDeleted.bind(this);
+    this.onCoordsChanged = this.onCoordsChanged.bind(this);
   }
   componentDidMount() {
     getPostItNotes()
@@ -32,33 +40,18 @@ export default class App extends Component {
       }))
     ;
   }
-  onAdderBtnClick() {
-    const temporaryId = getRandomId();
-    const newPostItNote = {
-      id: temporaryId,
-    };
-    this.setState({
-      postItNotes: this.state.postItNotes.concat(newPostItNote),
-    });
-
-    addPostItNote()
-      .then((postItNote) => {
-        // Replacing temporaryId for server returned id.
-        this.updatePostItNoteInState(temporaryId, {
-          id: postItNote.id,
-        });
-      });
-  }
-  onContentChanged(postItNoteId, content) {
-    this.updatePostItNoteInState(postItNoteId, {
-      content,
-    });
-
-    editPostItNoteContentDebounced(postItNoteId, content);
-  }
+  /**
+   * Conveniency func to pass updates by post it note id.
+   * @param  {string} postItNoteId
+   * @param  {object} updates
+   * @throws if not found.
+   */
   updatePostItNoteInState(postItNoteId, updates) {
     const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
     let postItNote = this.state.postItNotes[index];
+    if (!postItNote) {
+      throw new Error(`Not found by id: ${postItNoteId}`);
+    }
 
     postItNote = Object.assign({}, postItNote, updates);
 
@@ -69,6 +62,29 @@ export default class App extends Component {
         ...this.state.postItNotes.slice(index + 1),
       ],
     });
+  }
+  onAdderBtnClick() {
+    const temporaryId = getRandomId();
+    const newPostItNote = {
+      id: temporaryId,
+    };
+    this.setState({
+      postItNotes: this.state.postItNotes.concat(newPostItNote),
+    });
+
+    // Use client to add post it note, and replace temporary id when done.
+    addPostItNote()
+      .then((postItNote) => {
+        this.updatePostItNoteInState(temporaryId, {
+          id: postItNote.id,
+        });
+      });
+  }
+  onContentChanged(postItNoteId, content) {
+    this.updatePostItNoteInState(postItNoteId, {
+      content,
+    });
+    editPostItNoteContentDebounced(postItNoteId, content);
   }
   onPostItNoteDeleted(postItNoteId) {
     deletePostItNoteContent(postItNoteId);
@@ -89,6 +105,15 @@ export default class App extends Component {
     if (this.state.selectedPostItNoteId === postItNoteId) {
       this.setState({ selectedPostItNoteId: null });
     }
+  }
+  onCoordsChanged(postItNoteId, x, y) {
+    this.updatePostItNoteInState(postItNoteId, {
+      coords: {
+        x,
+        y,
+      },
+    });
+    editPostItNoteCoords(postItNoteId, x, y);
   }
 
   render() {
@@ -111,7 +136,7 @@ export default class App extends Component {
               onSelect={this.onPostItNoteSelected}
               onUnselect={this.onPostItNoteUnselected}
               onDelete={this.onPostItNoteDeleted}
-              onCoordsChanged={(postItNoteId, x, y) => editPostItNoteCoords(postItNoteId, x, y)}
+              onCoordsChanged={this.onCoordsChanged}
             />
           ))}
         </ul>

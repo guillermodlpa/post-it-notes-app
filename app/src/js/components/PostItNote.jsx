@@ -4,6 +4,9 @@ import React, {
 } from 'react';
 import Draggable from 'react-draggable';
 
+/**
+ * PostItNote is a dumb component that invokes props passed by its parent component.
+ */
 export default class PostItNote extends Component {
   constructor() {
     super();
@@ -16,7 +19,6 @@ export default class PostItNote extends Component {
   onContentChanged(event) {
     this.props.onContentChanged(this.props.id, event.target.textContent);
   }
-
   select() {
     this.props.onSelect(this.props.id);
   }
@@ -33,7 +35,6 @@ export default class PostItNote extends Component {
       data.y,
     );
   }
-
   render() {
     const isSelected = this.props.isSelected;
     const className = `post-it-note${isSelected ? ' is-selected' : ''}`;
@@ -47,6 +48,7 @@ export default class PostItNote extends Component {
         defaultPosition={this.props.coords}
         onStop={this.onDraggableStop}
       >
+        {/* Draggable doesn't create HTML nodes. So this child is at the top still. */}
         <li
           className="post-it-note-wrap"
         >
