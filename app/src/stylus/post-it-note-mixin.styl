@@ -17,7 +17,7 @@ postItNote()
 	background -ms-linear-gradient(-45deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* IE10+ */
 	background linear-gradient(135deg, $postItColor 81%,$postItColor 82%,$postItColor 82%,$postItLighterColor 100%) /* W3C */
 
-	border 1px solid #E8E8E8
+	border 1px solid #BDBD65
 
 	font-family "Comic Sans MS", cursive, sans-serif
 
@@ -38,6 +38,10 @@ postItNote()
 		cursor pointer
 		outline 0
 		vendor('user-select', 'none')
+
+	// when selected
+	&.is-selected
+		border-color #66E3FF
 
 postItNoteFold()
 
