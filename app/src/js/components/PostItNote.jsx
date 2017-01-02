@@ -22,7 +22,7 @@ export default class PostItNote extends Component {
     this.props.onUnselect(this.props.id);
   }
   delete() {
-    // @TODO
+    this.props.onDeleteBtnClick(this.props.id);
   }
 
 
@@ -63,4 +63,5 @@ PostItNote.propTypes = {
   onContentChanged: PropTypes.func,
   onSelect: PropTypes.func,
   onUnselect: PropTypes.func,
+  onDeleteBtnClick: PropTypes.func,
 };

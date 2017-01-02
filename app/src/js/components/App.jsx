@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   getPostItNotes,
   addPostItNote,
+  deletePostItNoteContent,
   editPostItNoteContentDebounced,
 } from '../client';
 import PostItNote from './PostItNote';
@@ -18,6 +19,7 @@ export default class App extends Component {
     this.onContentChanged = this.onContentChanged.bind(this);
     this.onNoteSelected = this.onNoteSelected.bind(this);
     this.onNoteUnselected = this.onNoteUnselected.bind(this);
+    this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);
   }
   componentDidMount() {
     getPostItNotes()
@@ -34,8 +36,8 @@ export default class App extends Component {
       postItNotes: this.state.postItNotes.concat(newPostItNote),
     });
   }
-  onContentChanged(id, content) {
-    const index = indexWhere(this.state.postItNotes, 'id', id);
+  onContentChanged(postItNoteId, content) {
+    const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
     const postItNote = this.state.postItNotes[index];
 
     postItNote.content = content;
@@ -49,6 +51,18 @@ export default class App extends Component {
     });
 
     editPostItNoteContentDebounced(postItNote.id, postItNote.content);
+  }
+  onDeleteBtnClick(postItNoteId) {
+    deletePostItNoteContent(postItNoteId);
+
+    const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
+
+    this.setState({
+      postItNotes: [
+        ...this.state.postItNotes.slice(0, index),
+        ...this.state.postItNotes.slice(index + 1),
+      ],
+    });
   }
 
   onNoteSelected(selectedPostItNoteId) {
@@ -76,6 +90,7 @@ export default class App extends Component {
               onContentChanged={this.onContentChanged}
               onSelect={this.onNoteSelected}
               onUnselect={this.onNoteUnselected}
+              onDeleteBtnClick={this.onDeleteBtnClick}
             />
           ))}
         </ul>

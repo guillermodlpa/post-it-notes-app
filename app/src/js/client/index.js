@@ -1,5 +1,5 @@
-import { apiUrl, headers } from '../config';
 import debounce from 'debounce';
+import { apiUrl, headers } from '../config';
 
 function getItemWithoutUnderscoreId(item) {
   /* eslint-disable no-underscore-dangle */
@@ -37,6 +37,15 @@ export function editPostItNoteContent(id, newContent) {
     body: JSON.stringify({
       content: newContent,
     }),
+  })
+    .then(response => response.json())
+  ;
+}
+
+export function deletePostItNoteContent(id) {
+  return fetch(`${apiUrl}/post_it_note/${id}`, {
+    method: 'DELETE',
+    headers,
   })
     .then(response => response.json())
   ;
