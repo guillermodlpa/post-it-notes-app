@@ -7,8 +7,6 @@ logs/
 *.log
 log.txt
 
-*.lock
-
 # browserified JS
 app/public/js/bundles
 
