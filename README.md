@@ -2,13 +2,11 @@
 
 Web app to interact with a post it notes wall.
 
-Project to get familiar with:
+A project to get familiar with:
 
 * React
 * Gulp
 * MongoDB
-
-Checkout vagrant-backbone branch to see old implementation using BackboneJS and vagrant.
 
 ## Setup for local development.
 
@@ -38,3 +36,7 @@ Checkout vagrant-backbone branch to see old implementation using BackboneJS and 
 
    Access it at `http://localhost:8000/`.
 
+
+*Screen recording:*
+
+![screen recording 2017-01-02 at 04 32 pm](https://cloud.githubusercontent.com/assets/1557348/21591948/4b96beec-d109-11e6-8024-a31ac836cbac.gif)
