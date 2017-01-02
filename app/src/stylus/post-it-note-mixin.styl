@@ -1,10 +1,8 @@
 $postItColor = #ffff88
 $postItLighterColor = #ffffc6
 
-/////
-//// Post-It styles come originally from
-///  http://mentormate.com/blog/css-postit-note/
-//
+// Attribution:
+// Styles inspired on http://mentormate.com/blog/css-postit-note/
 
 postItNote()
 	position relative
@@ -25,23 +23,8 @@ postItNote()
 
 	border-bottom-right-radius 37% 5%
 
-	// shadow in the bottom right corner
-	&:after
-		content ""
-		position absolute
-		right -0px
-		bottom 20px
-		width 50%
-		height 10%
-
-		z-index -1
-		background rgba(0, 0, 0, 0.2)
-		box-shadow 2px 20px 5px rgba(0, 0, 0, 0.40)
-		vendor('transform', matrix(-1, -0.1, 0, 1, 0, 0));
-
 	&.ui-draggable-dragging
-
-		box-shadow 5px 20px 20px -5px rgba(0,0,0,.4)
+		box-shadow 5px 20px 20px -5px rgba(0, 0, 0, .4)
 
 		&:after
 			display none
@@ -54,5 +37,21 @@ postItNote()
 		font-family inherit
 		cursor pointer
 		outline 0
-		vendor('user-select', 'none');
+		vendor('user-select', 'none')
+
+postItNoteFold()
+
+	// shadow in the bottom right corner
+	&:after
+		content ""
+		position absolute
+		right -0px
+		bottom 20px
+		width 50%
+		height 10%
+
+		z-index -1
+		background rgba(0, 0, 0, .2)
+		box-shadow 2px 20px 5px rgba(0, 0, 0, .40)
+		vendor('transform', matrix(-1, -.1, 0, 1, 0, 0))
 

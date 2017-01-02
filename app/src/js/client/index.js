@@ -42,6 +42,21 @@ export function editPostItNoteContent(id, newContent) {
   ;
 }
 
+export function editPostItNoteCoords(id, x, y) {
+  return fetch(`${apiUrl}/post_it_note/${id}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({
+      coords: {
+        x,
+        y,
+      },
+    }),
+  })
+    .then(response => response.json())
+  ;
+}
+
 export function deletePostItNoteContent(id) {
   return fetch(`${apiUrl}/post_it_note/${id}`, {
     method: 'DELETE',

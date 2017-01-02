@@ -1,16 +1,22 @@
 $postItSize = 15rem // original 250px
 
-.post-it-note
-
-	postItNote()
-
+.post-it-note-wrap
 	display inline-block
 
 	width  $postItSize
-	min-height $postItSize
-	max-height $postItSize
+	height $postItSize
 
 	margin  0 1rem 3rem 1rem
+
+	postItNoteFold()
+
+.post-it-note
+	display inline-block
+
+	postItNote()
+
+	width  100%
+	height 100%
 
 	// when selected
 	&.is-selected

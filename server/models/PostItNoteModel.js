@@ -8,11 +8,11 @@ const postItNotesSchema = mongoose.Schema({
     default: Date.now,
   },
   coords: {
-    top: {
+    x: {
       type: Number,
       default: -1,
     },
-    left: {
+    y: {
       type: Number,
       default: -1,
     },

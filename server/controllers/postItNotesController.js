@@ -32,7 +32,6 @@ function index(req, res/* , next*/) {
   });
   db.once('open', (/* callback*/) => {
     // find all.
-    // eslint-disable-next-line array-callback-return
     PostItNoteModel.find((err, postItNotes) => {
       if (err) {
         sendError(res, 'errorWithFindPostItNotes');
@@ -63,7 +62,6 @@ function get(req, res/* , next*/) {
     const conditions = {
       _id: postItNoteId,
     };
-    // eslint-disable-next-line array-callback-return
     PostItNoteModel.find(conditions, (err, postItNotes) => {
       if (err) {
         sendError(res, 'notFound');

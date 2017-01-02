@@ -2,6 +2,7 @@ import React, {
   Component,
   PropTypes,
 } from 'react';
+import Draggable from 'react-draggable';
 
 export default class PostItNote extends Component {
   constructor() {
@@ -10,6 +11,7 @@ export default class PostItNote extends Component {
     this.select = this.select.bind(this);
     this.unselect = this.unselect.bind(this);
     this.delete = this.delete.bind(this);
+    this.onDraggableStop = this.onDraggableStop.bind(this);
   }
   onContentChanged(event) {
     this.props.onContentChanged(this.props.id, event.target.textContent);
@@ -22,36 +24,55 @@ export default class PostItNote extends Component {
     this.props.onUnselect(this.props.id);
   }
   delete() {
-    this.props.onDeleteBtnClick(this.props.id);
+    this.props.onDelete(this.props.id);
   }
-
+  onDraggableStop(event, data) {
+    this.props.onCoordsChanged(
+      this.props.id,
+      data.x,
+      data.y,
+    );
+  }
 
   render() {
     const isSelected = this.props.isSelected;
     const className = `post-it-note${isSelected ? ' is-selected' : ''}`;
 
     return (
-      <li
-        className={className}
-        onMouseEnter={this.select}
-        onMouseLeave={this.unselect}
-        onClick={this.select}
+      <Draggable
+        axis="both"
+        handle=""
+        grid={[25, 25]}
+        zIndex={100}
+        defaultPosition={this.props.coords}
+        onStop={this.onDraggableStop}
       >
-        <div
-          className="post-it-note-content"
-          contentEditable="true"
-          onInput={this.onContentChanged}
-          onBlur={this.onContentChanged}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: this.props.content || '' }}
-        />
-        <button
-          className="post-it-note-button post-it-note-delete"
-          onClick={this.delete}
+        <li
+          className="post-it-note-wrap"
         >
-          Delete
-        </button>
-      </li>
+          <div
+            className={className}
+            onMouseEnter={this.select}
+            onMouseLeave={this.unselect}
+            onClick={this.select}
+          >
+            <div
+              className="post-it-note-content"
+              contentEditable="true"
+              onInput={this.onContentChanged}
+              onBlur={this.onContentChanged}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: this.props.content || '' }}
+            />
+            <button
+              className="post-it-note-button post-it-note-delete"
+              onClick={this.delete}
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+      </Draggable>
     );
   }
 }
@@ -63,5 +84,7 @@ PostItNote.propTypes = {
   onContentChanged: PropTypes.func,
   onSelect: PropTypes.func,
   onUnselect: PropTypes.func,
-  onDeleteBtnClick: PropTypes.func,
+  onDelete: PropTypes.func,
+  onCoordsChanged: PropTypes.func,
+  coords: PropTypes.objectOf(React.PropTypes.number),
 };

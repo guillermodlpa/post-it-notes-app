@@ -4,6 +4,7 @@ import {
   addPostItNote,
   deletePostItNoteContent,
   editPostItNoteContentDebounced,
+  editPostItNoteCoords,
 } from '../client';
 import PostItNote from './PostItNote';
 import { indexWhere } from '../utils';
@@ -17,9 +18,9 @@ export default class App extends Component {
     };
     this.onAdderBtnClick = this.onAdderBtnClick.bind(this);
     this.onContentChanged = this.onContentChanged.bind(this);
-    this.onNoteSelected = this.onNoteSelected.bind(this);
-    this.onNoteUnselected = this.onNoteUnselected.bind(this);
-    this.onDeleteBtnClick = this.onDeleteBtnClick.bind(this);
+    this.onPostItNoteSelected = this.onPostItNoteSelected.bind(this);
+    this.onPostItNoteUnselected = this.onPostItNoteUnselected.bind(this);
+    this.onPostItNoteDeleted = this.onPostItNoteDeleted.bind(this);
   }
   componentDidMount() {
     getPostItNotes()
@@ -52,7 +53,7 @@ export default class App extends Component {
 
     editPostItNoteContentDebounced(postItNote.id, postItNote.content);
   }
-  onDeleteBtnClick(postItNoteId) {
+  onPostItNoteDeleted(postItNoteId) {
     deletePostItNoteContent(postItNoteId);
 
     const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
@@ -64,21 +65,23 @@ export default class App extends Component {
       ],
     });
   }
-
-  onNoteSelected(selectedPostItNoteId) {
+  onPostItNoteSelected(selectedPostItNoteId) {
     this.setState({ selectedPostItNoteId });
   }
-  onNoteUnselected(postItNoteId) {
+  onPostItNoteUnselected(postItNoteId) {
     if (this.state.selectedPostItNoteId === postItNoteId) {
       this.setState({ selectedPostItNoteId: null });
     }
   }
+
   render() {
     return (
       <div>
         <div id="adder-container">
           <button id="adder-btn" className="post-it" onClick={this.onAdderBtnClick}>
-            <span>+</span>
+            <span>
+              +
+            </span>
           </button>
         </div>
         <ul>
@@ -88,9 +91,10 @@ export default class App extends Component {
               {...object}
               isSelected={this.state.selectedPostItNoteId === object.id}
               onContentChanged={this.onContentChanged}
-              onSelect={this.onNoteSelected}
-              onUnselect={this.onNoteUnselected}
-              onDeleteBtnClick={this.onDeleteBtnClick}
+              onSelect={this.onPostItNoteSelected}
+              onUnselect={this.onPostItNoteUnselected}
+              onDelete={this.onPostItNoteDeleted}
+              onCoordsChanged={(postItNoteId, x, y) => editPostItNoteCoords(postItNoteId, x, y)}
             />
           ))}
         </ul>
