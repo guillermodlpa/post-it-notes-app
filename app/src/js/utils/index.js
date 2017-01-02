@@ -8,6 +8,7 @@ export function filterObject(object, predicate) {
   });
   return result;
 }
+
 export function indexWhere(array, key, value) {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < array.length; i++) {
@@ -21,3 +22,7 @@ export function indexWhere(array, key, value) {
   return undefined;
 }
 
+export function getRandomId() {
+  // good enough implementation for what we need.
+  return Math.random().toString(36).substr(2, 10);
+}

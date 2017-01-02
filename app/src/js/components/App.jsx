@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PostItNote from './PostItNote';
 import {
   getPostItNotes,
   addPostItNote,
@@ -6,8 +7,10 @@ import {
   editPostItNoteContentDebounced,
   editPostItNoteCoords,
 } from '../client';
-import PostItNote from './PostItNote';
-import { indexWhere } from '../utils';
+import {
+  indexWhere,
+  getRandomId,
+} from '../utils';
 
 export default class App extends Component {
   constructor() {
@@ -30,18 +33,34 @@ export default class App extends Component {
     ;
   }
   onAdderBtnClick() {
-    addPostItNote();
-
-    const newPostItNote = {};
+    const temporaryId = getRandomId();
+    const newPostItNote = {
+      id: temporaryId,
+    };
     this.setState({
       postItNotes: this.state.postItNotes.concat(newPostItNote),
     });
+
+    addPostItNote()
+      .then((postItNote) => {
+        // Replacing temporaryId for server returned id.
+        this.updatePostItNoteInState(temporaryId, {
+          id: postItNote.id,
+        });
+      });
   }
   onContentChanged(postItNoteId, content) {
-    const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
-    const postItNote = this.state.postItNotes[index];
+    this.updatePostItNoteInState(postItNoteId, {
+      content,
+    });
 
-    postItNote.content = content;
+    editPostItNoteContentDebounced(postItNoteId, content);
+  }
+  updatePostItNoteInState(postItNoteId, updates) {
+    const index = indexWhere(this.state.postItNotes, 'id', postItNoteId);
+    let postItNote = this.state.postItNotes[index];
+
+    postItNote = Object.assign({}, postItNote, updates);
 
     this.setState({
       postItNotes: [
@@ -50,8 +69,6 @@ export default class App extends Component {
         ...this.state.postItNotes.slice(index + 1),
       ],
     });
-
-    editPostItNoteContentDebounced(postItNote.id, postItNote.content);
   }
   onPostItNoteDeleted(postItNoteId) {
     deletePostItNoteContent(postItNoteId);

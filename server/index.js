@@ -3,11 +3,14 @@
 import express from 'express';
 import partials from 'express-partials';
 import bodyParser from 'body-parser'; // for POST request parameters parsing into req.body automatically
+import cluster from 'cluster';
+import os from 'os';
 
 import routes from './controllers/routes';
 
 const ip = '0.0.0.0';
 const port = 8000;
+const numCPUs = os.cpus().length;
 
 const app = express();
 
@@ -29,11 +32,29 @@ app.use(express.static('app/build'));
 // explicitly indicate views directory, as it was failing otherwise
 app.set('views', `${__dirname}/views`);
 
-// @TODO, make this better using different threads
-// Listen on port 8000, IP defaults to 127.0.0.1
-app.listen(port, ip, () => {
-  /* eslint-disable no-console */
-  // Put a friendly message on the terminal
-  console.log(`${Date.now()} - Server running at http://${ip}/${port}`);
-  /* eslint-enable no-console */
-});
+if (cluster.isMaster) {
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on('exit', (deadWorker/* , code, signal*/) => {
+    // Restart the worker
+    const worker = cluster.fork();
+
+    // Note the process IDs
+    const newPID = worker.process.pid;
+    const oldPID = deadWorker.process.pid;
+
+    // Log the event
+    /* eslint-disable no-console */
+    console.log(`Worker ${oldPID} died.`);
+    console.log(`Worker ${newPID} born.`);
+    /* eslint-enable no-console */
+  });
+} else {
+  app.listen(port, ip, () => {
+    // Put a friendly message on the terminal
+    // eslint-disable-next-line no-console
+    console.log(`${Date.now()} - Server running at http://${ip}/${port} - numCPUs=${numCPUs}`);
+  });
+}

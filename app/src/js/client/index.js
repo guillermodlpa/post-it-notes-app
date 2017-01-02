@@ -27,6 +27,7 @@ export function addPostItNote(data) {
     body: JSON.stringify(data),
   })
     .then(response => response.json())
+    .then(response => getItemWithoutUnderscoreId(response))
   ;
 }
 
@@ -39,6 +40,7 @@ export function editPostItNoteContent(id, newContent) {
     }),
   })
     .then(response => response.json())
+    .then(response => getItemWithoutUnderscoreId(response))
   ;
 }
 
