@@ -42,7 +42,7 @@ export default class PostItNote extends Component {
       <Draggable
         axis="both"
         handle=""
-        grid={[25, 25]}
+        grid={[1, 1]}
         zIndex={100}
         defaultPosition={this.props.coords}
         onStop={this.onDraggableStop}
